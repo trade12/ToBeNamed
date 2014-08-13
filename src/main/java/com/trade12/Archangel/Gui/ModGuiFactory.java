@@ -1,4 +1,4 @@
-package com.trade12.ToBeNamed.Gui;
+package com.trade12.Archangel.Gui;
 
 import cpw.mods.fml.client.IModGuiFactory;
 import net.minecraft.client.Minecraft;

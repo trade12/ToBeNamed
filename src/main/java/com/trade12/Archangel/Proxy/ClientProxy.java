@@ -1,4 +1,4 @@
-package com.trade12.ToBeNamed.Proxy;
+package com.trade12.Archangel.Proxy;
 
 /**
  * Created by kieran on 13/08/2014.
