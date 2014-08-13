@@ -1,6 +1,6 @@
 package com.trade12.ToBeNamed;
 
-import com.trade12.ToBeNamed.Proxy.IProxy;
+import com.trade12.ToBeNamed.Proxy.CommonProxy;
 import com.trade12.ToBeNamed.lib.Ref;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -17,7 +17,7 @@ public class ToBeNamed {
     public static ToBeNamed instance;
 
     @SidedProxy(clientSide = Ref.CLIENT_PROXY_CLASS, serverSide = Ref.SERVER_PROXY_CLASS)
-    public static IProxy proxy;
+    public static CommonProxy proxy;
 
     //Config stuff here
 
@@ -27,9 +27,7 @@ public class ToBeNamed {
     public void preInt(FMLPreInitializationEvent event)
     {
 
-        //  EntityRegistry.addSpawn(EntityBuddy.class, 10, 2, 4, EnumCreatureType.monster);
-        //  EntityList.addMapping(EntityBuddy.class, "Ref.Buddy", 5, 113213, 3523523);
-            /* Network, Blocks and items initialization */
+
     }
 
 
