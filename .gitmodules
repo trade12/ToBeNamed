@@ -1,0 +1,3 @@
+[submodule "src/main/java/api/Baubles"]
+	path = src/main/java/api/Baubles
+	url = https://github.com/Azanor/Baubles.git
