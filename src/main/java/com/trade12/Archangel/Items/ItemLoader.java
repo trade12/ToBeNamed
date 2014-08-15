@@ -1,5 +1,6 @@
 package com.trade12.Archangel.Items;
 
+import com.trade12.Archangel.Items.Angel.ItemAngelPower;
 import com.trade12.Archangel.Items.Angel.ItemAngelRing;
 import net.minecraft.item.Item;
 
@@ -15,6 +16,6 @@ public class ItemLoader {
     public static void load()
     {
         angelRing = new ItemAngelRing();
-        AngelPower = new ItemAngelBattery();
+        AngelPower = new ItemAngelPower();
     }
 }

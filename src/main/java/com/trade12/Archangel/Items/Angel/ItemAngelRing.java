@@ -3,6 +3,7 @@ package com.trade12.Archangel.Items.Angel;
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import com.trade12.Archangel.Archangel;
+import com.trade12.Archangel.Config.ConfigHandler;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.relauncher.Side;
@@ -32,7 +33,7 @@ public class ItemAngelRing extends Item implements IBauble {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void registerIcon(IIconRegister register)
+    public void registerIcons(IIconRegister register)
     {
         this.itemIcon = register.registerIcon(Ref.MOD_ID + ":" + Ref.UNLOCALISED_ANGELRING);
     }
@@ -56,7 +57,7 @@ public class ItemAngelRing extends Item implements IBauble {
     }
 
     @Override
-    public void onEquipTick(ItemStack itemStack, EntityLivingBase entity)
+    public void onWornTick(ItemStack itemStack, EntityLivingBase entity)
     {
         if (entity instanceof EntityPlayer)
         {

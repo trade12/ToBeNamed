@@ -1,11 +1,16 @@
 package com.trade12.Archangel;
 
+import com.trade12.Archangel.Config.ConfigHandler;
+import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.Proxy.CommonProxy;
 import com.trade12.Archangel.lib.Ref;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -33,12 +38,19 @@ public class Archangel {
 
 
     @Mod.EventHandler
-    public void preInt(FMLPreInitializationEvent event)
+    public void preInit(FMLPreInitializationEvent event)
     {
-
+        ConfigHandler.init(event.getSuggestedConfigurationFile());
+        ItemLoader.load();
 
     }
 
+    @SideOnly(Side.CLIENT)
+    @Mod.EventHandler
+    public void preInitClient(FMLInitializationEvent event)
+    {
+      //  FMLCommonHandler.instance().bus().register(new KeyHandler()); //todo; add KeyHandler
+    }
 
 
     @Mod.EventHandler

@@ -14,6 +14,7 @@ public class Ref {
 
     //Unlocalised Names
     public static final String UNLOCALISED_ANGELRING = "angelRing";
+    public static final String UNLOCALISED_ANGEL_POWER = "angelPower";
 
     //Config Settings
     public static final String MAX_CHARGE_NAME = "maxCharge";
