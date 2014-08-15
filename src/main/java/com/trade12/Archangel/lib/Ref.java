@@ -14,4 +14,12 @@ public class Ref {
 
     //Unlocalised Names
     public static final String UNLOCALISED_ANGELRING = "angelRing";
+
+    //Config Settings
+    public static final String MAX_CHARGE_NAME = "maxCharge";
+    public static final int MAX_CHARGE_DEFAULT = 500;
+    public static final int MAX_CHARGE_MAX = 5000;
+    public static final String MAX_CHARGE_DESC = "Maximum Charge for items.";
+
+    public static final String TWEAKS_GROUP = "tweaks";
 }

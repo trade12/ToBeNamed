@@ -1,5 +1,6 @@
 package com.trade12.Archangel.Config;
 
+import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.config.Configuration;
@@ -19,12 +20,26 @@ public class ConfigHandler {
         if (configuration == null)
         {
             configuration = new Configuration(file);
-            loadConfiguration;
+            loadConfiguration();
         }
     }
 
     private static void loadConfiguration()
     {
+        maxCharge = configuration.getInt(Ref.MAX_CHARGE_NAME, Ref.TWEAKS_GROUP, maxCharge, Ref.MAX_CHARGE_DEFAULT, Ref.MAX_CHARGE_MAX, Ref.MAX_CHARGE_DESC);
+        if (configuration.hasChanged())
+        {
+            configuration.save();
+        }
 
+    }
+
+    @SubscribeEvent
+    public void onConfigurationChange(ConfigChangedEvent.OnConfigChangedEvent event)
+    {
+        if(event.modID.equalsIgnoreCase(Ref.MOD_ID))
+        {
+            loadConfiguration();
+        }
     }
 }
