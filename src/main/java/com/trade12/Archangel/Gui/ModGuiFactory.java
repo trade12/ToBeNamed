@@ -12,7 +12,7 @@ import java.util.Set;
 public class ModGuiFactory implements IModGuiFactory {
 
     @Override
-    public void initialise(Minecraft minecraftInstance)
+    public void initialize(Minecraft minecraftInstance)
     {
 
     }
@@ -20,7 +20,7 @@ public class ModGuiFactory implements IModGuiFactory {
     @Override
     public Class<? extends GuiScreen> mainConfigGuiClass()
     {
-        return ConfigGUI.class;
+        return GUIConfig.class;
     }
 
     @Override
