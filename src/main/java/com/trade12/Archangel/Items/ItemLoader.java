@@ -24,6 +24,7 @@ public class ItemLoader {
     public static Item sarielPower;
     public static Item nathanielPendant, nathanielRing, nathanielBelt;
     public static Item nathanielPower;
+    public static Item ostracheFeather;
 
 
     public static void load()
