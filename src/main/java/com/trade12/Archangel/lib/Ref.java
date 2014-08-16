@@ -10,6 +10,7 @@ public class Ref {
     public static final String DEPENDENCIES = "required-after:Baubles";
     public static final String SERVER_PROXY_CLASS = "com.trade12.Archangel.Proxy.ServerProxy";
     public static final String CLIENT_PROXY_CLASS = "com.trade12.Archangel.Proxy.ClientProxy";
+    public static final String MOD_GUI_FACTORY = "com.trade.Archangel.Gui.ModGuiFactory";
 
 
     //Unlocalised Names
@@ -23,8 +24,10 @@ public class Ref {
     public static final String UNLOCALISED_SARIEL_BELT = "sarielBelt";
     public static final String UNLOCALISED_SARIEL_PENDANT = "SarielPendant";
 
-
-
+    public static final String UNLOCALISED_NATHANIEL_RING = "nathanielRing";
+    public static final String UNLOCALISED_NATHANIEL_POWER = "nathanielPower";
+    public static final String UNLOCALISED_NATHANIEL_BELT = "nathaniel_Belt";
+    public static final String UNLOCALISED_NATHANIEL_PENDANT = "nathaniel_Pendant";
 
 
     //Config Settings

@@ -26,7 +26,7 @@ public class KeyHandler {
     @SideOnly(Side.CLIENT)
     public KeyHandler() {
         keys = new KeyBinding[desc.length];
-        for (int i = 0; i < desc.length; ++i) ;
+        for (int i = 0; i < desc.length; ++i)
         {
             keys[i] = new KeyBinding(desc[i], keyValues[i], "key.Archangel.category");
             ClientRegistry.registerKeyBinding(keys[i]);

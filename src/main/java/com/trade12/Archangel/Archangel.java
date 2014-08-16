@@ -19,23 +19,20 @@ import net.minecraft.item.Item;
 /**
  * Created by kieran on 13/08/2014.
  */
-@Mod(modid= Ref.MOD_ID, name=Ref.MOD_NAME, version=Ref.VERSION_NUMBER, dependencies = Ref.DEPENDENCIES)
+@Mod(modid= Ref.MOD_ID, name=Ref.MOD_NAME, version=Ref.VERSION_NUMBER, dependencies = Ref.DEPENDENCIES, guiFactory = Ref.MOD_GUI_FACTORY)
 public class Archangel {
-
-    @Mod.Instance(Ref.MOD_ID)
-    public static Archangel instance;
 
     @SidedProxy(clientSide = Ref.CLIENT_PROXY_CLASS, serverSide = Ref.SERVER_PROXY_CLASS)
     public static CommonProxy proxy;
 
-    public static CreativeTabs tabCustom = new CreativeTabs("Archangel") {
+    public static CreativeTabs tabCustom = new CreativeTabs("Archangel")
+    {
         @Override
-        public Item getTabIconItem() {
+        public Item getTabIconItem()
+        {
             return Item.getItemFromBlock(Blocks.quartz_block);
         }
     };
-
-    //Config stuff here
 
 
     @Mod.EventHandler
@@ -43,6 +40,7 @@ public class Archangel {
     {
         ConfigHandler.init(event.getSuggestedConfigurationFile());
         ItemLoader.load();
+        proxy.initRenders();
 
     }
 

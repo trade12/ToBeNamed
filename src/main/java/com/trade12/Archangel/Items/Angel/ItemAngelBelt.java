@@ -83,7 +83,7 @@ public class ItemAngelBelt extends Item implements IBauble {
             }
 
             if (itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge) {
-                if (player.inventory.hasItem(ItemLoader.AngelPower)) {
+                if (player.inventory.hasItem(ItemLoader.angelPower)) {
                     for (int ia = 0; ia <= 35; ia++) {
                         if (player.inventory.getStackInSlot(ia) != null) {
                             if (player.inventory.getStackInSlot(ia).getUnlocalizedName().equals("item.AngelPower")) {
