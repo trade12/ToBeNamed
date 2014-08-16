@@ -1,6 +1,7 @@
 package com.trade12.Archangel;
 
 import com.trade12.Archangel.Config.ConfigHandler;
+import com.trade12.Archangel.Handler.KeyHandler;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.Proxy.CommonProxy;
 import com.trade12.Archangel.lib.Ref;
@@ -18,7 +19,7 @@ import net.minecraft.item.Item;
 /**
  * Created by kieran on 13/08/2014.
  */
-@Mod(modid= Ref.MOD_ID, name=Ref.MOD_NAME, version=Ref.VERSION_NUMBER)
+@Mod(modid= Ref.MOD_ID, name=Ref.MOD_NAME, version=Ref.VERSION_NUMBER, dependencies = Ref.DEPENDENCIES)
 public class Archangel {
 
     @Mod.Instance(Ref.MOD_ID)
@@ -49,7 +50,7 @@ public class Archangel {
     @Mod.EventHandler
     public void preInitClient(FMLInitializationEvent event)
     {
-      //  FMLCommonHandler.instance().bus().register(new KeyHandler()); //todo; add KeyHandler
+        FMLCommonHandler.instance().bus().register(new KeyHandler());
     }
 
 
