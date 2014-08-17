@@ -14,7 +14,8 @@ import net.minecraft.entity.Entity;
  */
 public class RenderOstrich extends RenderLiving {
 
-    private static final ResourceLocation texture = new ResourceLocation(Ref.MOD_ID + ":" + Ref.TEXTURE_OSTRICH);
+   private static final ResourceLocation texture = new ResourceLocation("archangel", "textures/entity/ostrich.png");
+      //private static final ResourceLocation texture = new ResourceLocation("Archangel" + "textures/entity/ostrich.png");
 
     public RenderOstrich(ModelBase modelBase, float i)
     {

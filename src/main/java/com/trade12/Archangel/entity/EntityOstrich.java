@@ -24,9 +24,8 @@ public class EntityOstrich extends EntityAnimal {
     public EntityOstrich(World world)
     {
         super(world);
-        this.setSize(0.3F, 0.7F);
+        this.setSize(0.8F, 2.0F);
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIPanic(this, 1.4D));
         this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
         this.tasks.addTask(3, new EntityAITempt(this, 1.0D, Items.wheat_seeds, false));
         this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
@@ -44,7 +43,7 @@ public class EntityOstrich extends EntityAnimal {
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(8.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2D);
     }
 
     public void onLivingUpdate()
