@@ -5,7 +5,7 @@ import com.trade12.Archangel.Handler.KeyHandler;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.Proxy.CommonProxy;
 import com.trade12.Archangel.entity.EntityHandler;
-import com.trade12.Archangel.entity.EntityOstrach;
+import com.trade12.Archangel.entity.EntityOstrich;
 import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -15,7 +15,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import org.apache.logging.log4j.Logger;
 
 
 /**
@@ -43,7 +42,7 @@ public class Archangel {
     {
         ConfigHandler.init(event.getSuggestedConfigurationFile());
         ItemLoader.load();
-        EntityHandler.registerEntityWithOstrachSpawns(EntityOstrach.class, "entityOstrach", 0x663300, 0x996600, 5, 20, 500);
+        EntityHandler.registerEntityWithOstrachSpawns(EntityOstrich.class, "entityOstrach", 0x663300, 0x996600, 5, 20, 500);
         proxy.initRenders();
 
     }

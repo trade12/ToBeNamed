@@ -8,22 +8,20 @@ import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemFishFood;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.world.World;
 
 /**
  * Created by Kieran on 16/08/2014.
  */
-public class EntityOstrach extends EntityAnimal {
+public class EntityOstrich extends EntityAnimal {
 
     public float field_70886_e;
     public float destPos;
     public float field_70884_g;
     public float field_70888_h;
     public float field_70889_i = 1.0F;
-    public EntityOstrach(World world)
+    public EntityOstrich(World world)
     {
         super(world);
         this.setSize(0.3F, 0.7F);
@@ -87,6 +85,7 @@ public class EntityOstrach extends EntityAnimal {
         return "mob.chicken.say"; //todo fix sound
     }
     protected String getHurtSound()
+
     {
         return "mob.chicken.hurt";
     }
@@ -95,27 +94,31 @@ public class EntityOstrach extends EntityAnimal {
         return "mob.chicken.hurt";
     }
     protected void func_145780_a(int x, int y, int z, Blocks block)
+
     {
         this.playSound("mob.chicken.step", 0.15F, 1.0F);
     }
     protected Item getDropItem()
+
     {
         return ItemLoader.ostracheFeather;
     }
 
     protected void dropFewItems(boolean bool, int nom)
+
     {
         this.dropItem(Items.feather, 3);
     }
 
-    public EntityOstrach createChild(EntityAgeable ageable)
+    public EntityOstrich createChild(EntityAgeable ageable)
+
     {
-        return new EntityOstrach(this.worldObj);
+        return new EntityOstrich(this.worldObj);
     }
 
     public boolean isBreedingItem(ItemStack itemStack)
     {
-        return itemStack != null && itemStack.getItem() instanceof ItemFishFood;
+        return itemStack != null && itemStack.getItem() instanceof ItemSeedFood;
     }
 
     protected void dropRareDrop(int par1)

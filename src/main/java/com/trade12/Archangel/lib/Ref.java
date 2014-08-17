@@ -29,6 +29,9 @@ public class Ref {
     public static final String UNLOCALISED_NATHANIEL_BELT = "nathaniel_Belt";
     public static final String UNLOCALISED_NATHANIEL_PENDANT = "nathaniel_Pendant";
 
+    //Textures
+    public static final String TEXTURE_OSTRICH = "textures/entity/ostrich.png";
+
 
     //Config Settings
     public static final String MAX_CHARGE_NAME = "maxCharge";
