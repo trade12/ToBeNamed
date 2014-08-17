@@ -4,6 +4,7 @@ import com.trade12.Archangel.entity.EntityOstrich;
 import com.trade12.Archangel.entity.ModelOstrich;
 import com.trade12.Archangel.entity.RenderOstrich;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.common.MinecraftForge;
 
 /**
  * Created by kieran on 13/08/2014.

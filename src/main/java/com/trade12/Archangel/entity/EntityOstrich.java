@@ -1,6 +1,7 @@
 package com.trade12.Archangel.entity;
 
 import com.trade12.Archangel.Items.ItemLoader;
+import com.trade12.Archangel.lib.Ref;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -81,12 +82,12 @@ public class EntityOstrich extends EntityAnimal {
     protected void fall(float x) {}
     protected String getLivingSound()
     {
-        return "mob.chicken.say"; //todo fix sound
+        return ("archangel/sounds/ostrich_say.ogg"); //todo fix sound
     }
     protected String getHurtSound()
 
     {
-        return "mob.chicken.hurt";
+        return ("archangel/sounds/ostrich_say.ogg");
     }
     protected String getDeathSound()
     {

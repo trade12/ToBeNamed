@@ -29,8 +29,8 @@ public class Ref {
     public static final String UNLOCALISED_NATHANIEL_BELT = "nathaniel_Belt";
     public static final String UNLOCALISED_NATHANIEL_PENDANT = "nathaniel_Pendant";
 
-    //Textures
-    public static final String TEXTURE_OSTRICH = "textures/entity/ostrich.png";
+  //Sound
+    public static final String SOUND_OSTRICH = ("archangel/sounds/ostrich_say.ogg");
 
 
     //Config Settings
