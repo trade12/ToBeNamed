@@ -62,12 +62,11 @@ public class ItemAngelBelt extends Item implements IBauble {
         info.add("Current Charge: " + itemStack.stackTagCompound.getInteger("Charge"));
         if (active)
         {
-            info.add(EnumChatFormatting.DARK_PURPLE + "Secondary Ability Awakened");
+            info.add(EnumChatFormatting.DARK_PURPLE + Ref.UNLOCALISED_SECONDARY_ACTIVE);
         }
-
         if (!active)
         {
-            info.add(EnumChatFormatting.DARK_PURPLE + "Secondary Ability Suppressed");
+            info.add(EnumChatFormatting.DARK_PURPLE + Ref.UNLOCALISED_SECONDARY_DEACTIVE);
         }
     }
 

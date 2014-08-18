@@ -29,7 +29,11 @@ public class Ref {
     public static final String UNLOCALISED_NATHANIEL_BELT = "nathaniel_Belt";
     public static final String UNLOCALISED_NATHANIEL_PENDANT = "nathaniel_Pendant";
 
-    public static final String UNLOCALISED_AUTOFEEDER_RING = "autoFeeder_Ring";
+    //public static final String UNLOCALISED_AUTOFEEDER_RING = "autoFeeder_Ring";
+
+    //Ability
+    public static final String UNLOCALISED_SECONDARY_ACTIVE = "Secondary Ability Awakened";
+    public static final String UNLOCALISED_SECONDARY_DEACTIVE = "Secondary Ability Suppressed";
 
   //Sound
     public static final String SOUND_OSTRICH = ("archangel/sounds/ostrich_say.ogg");
