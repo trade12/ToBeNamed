@@ -4,7 +4,10 @@ package com.trade12.Archangel.entity;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 public  class ModelOstrich extends ModelBase
 {
@@ -32,8 +35,10 @@ public  class ModelOstrich extends ModelBase
     ModelRenderer Side_wing_top2;
     ModelRenderer Side_wing_bottom2;
 
+
     public ModelOstrich()
     {
+
         textureWidth = 64;
         textureHeight = 64;
 
@@ -213,34 +218,92 @@ public  class ModelOstrich extends ModelBase
         Side_wing_bottom2.setTextureSize(64, 64);
         Side_wing_bottom2.mirror = true;
         setRotation(Side_wing_bottom2, 0F, 0F, 2.991742F);
+
+        //sets the child models for legs so we can rotate the whole leg all at once
+        Shoulder1.addChild(Joint1);
+        Shoulder1.addChild(Leg1);
+        Shoulder1.addChild(Foot1);
+
+        Shoulder2.addChild(Joint2);
+        Shoulder2.addChild(Leg2);
+        Shoulder2.addChild(Foot2);
+
+        //sets the offset for the child parts because they were appearing in wrong place
+        for (int i = 0; i < this.Shoulder1.childModels.size(); i++)
+        {
+            ModelRenderer child = (ModelRenderer) this.Shoulder1.childModels.get(i);
+            ModelRenderer child2 = (ModelRenderer) this.Shoulder2.childModels.get(i);
+
+            child.offsetZ = 0.35F;
+            child.offsetY = -0.4F;
+            child.offsetX = 0.25F;
+
+            child2.offsetZ = -0.22F;
+            child2.offsetY = -0.4F;
+            child2.offsetX = 0.25F;
+        }
+
     }
 
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
     {
         super.render(entity, f, f1, f2, f3, f4, f5);
         setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-        Foot1.render(f5);
-        Foot2.render(f5);
-        Leg1.render(f5);
-        Leg2.render(f5);
-        Joint1.render(f5);
-        Joint2.render(f5);
-        Shoulder1.render(f5);
-        Shoulder2.render(f5);
-        Main_Body.render(f5);
-        Butt.render(f5);
-        Feather1.render(f5);
-        Feather2.render(f5);
-        Feather3.render(f5);
-        Lower_Neck.render(f5);
-        Main_Neck.render(f5);
-        Head.render(f5);
-        Bottom_Beak.render(f5);
-        Top_Beak.render(f5);
-        Side_wing_top1.render(f5);
-        Side_wing_bottom1.render(f5);
-        Side_wing_top2.render(f5);
-        Side_wing_bottom2.render(f5);
+
+        //Fixes the entity being red when hurt
+        if (entity.hurtResistantTime > 10 || ((EntityLivingBase)entity).getHealth() == 0)
+        {
+            GL11.glColor3d(4,0.5,0.5);
+        }
+        else
+        {
+            GL11.glColor3d(1,1,1);
+        }
+
+        if (isChild)
+        {
+            GL11.glPushMatrix();
+            //renders the model smaller if the entity is child
+            GL11.glTranslated(0,0.75,0);
+            GL11.glScaled(0.5,0.5,0.5);
+
+            Shoulder1.render(f5);
+            Shoulder2.render(f5);
+            Main_Body.render(f5);
+            Butt.render(f5);
+            Feather1.render(f5);
+            Feather2.render(f5);
+            Feather3.render(f5);
+            Lower_Neck.render(f5);
+            Main_Neck.render(f5);
+            Head.render(f5);
+            Bottom_Beak.render(f5);
+            Top_Beak.render(f5);
+            Side_wing_top1.render(f5);
+            Side_wing_bottom1.render(f5);
+            Side_wing_top2.render(f5);
+            Side_wing_bottom2.render(f5);
+            GL11.glPopMatrix();
+        }
+        else
+        {
+            Shoulder1.render(f5);
+            Shoulder2.render(f5);
+            Main_Body.render(f5);
+            Butt.render(f5);
+            Feather1.render(f5);
+            Feather2.render(f5);
+            Feather3.render(f5);
+            Lower_Neck.render(f5);
+            Main_Neck.render(f5);
+            Head.render(f5);
+            Bottom_Beak.render(f5);
+            Top_Beak.render(f5);
+            Side_wing_top1.render(f5);
+            Side_wing_bottom1.render(f5);
+            Side_wing_top2.render(f5);
+            Side_wing_bottom2.render(f5);
+        }
     }
 
     private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -252,8 +315,13 @@ public  class ModelOstrich extends ModelBase
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
     {
+        //the model is 90* rotated in the Y axis this fixes it
+        GL11.glRotated(90,0,1,0);
         super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-        GL11.glRotated(90, 0, 1,0);
+
+        //sets the rotation of the legs
+        this.Shoulder1.rotateAngleZ = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
+        this.Shoulder2.rotateAngleZ = MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1;
     }
 
 }

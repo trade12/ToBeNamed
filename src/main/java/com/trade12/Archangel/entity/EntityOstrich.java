@@ -2,6 +2,7 @@ package com.trade12.Archangel.entity;
 
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.lib.Ref;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
@@ -93,32 +94,30 @@ public class EntityOstrich extends EntityAnimal {
     {
         return "mob.chicken.hurt";
     }
-    protected void func_145780_a(int x, int y, int z, Blocks block)
 
+    protected void func_145780_a(int x, int y, int z, Blocks block)
     {
         this.playSound("mob.chicken.step", 0.15F, 1.0F);
     }
-    protected Item getDropItem()
 
+    protected Item getDropItem()
     {
         return ItemLoader.ostracheFeather;
     }
 
     protected void dropFewItems(boolean bool, int nom)
-
     {
         this.dropItem(Items.feather, 3);
     }
 
     public EntityOstrich createChild(EntityAgeable ageable)
-
     {
         return new EntityOstrich(this.worldObj);
     }
 
     public boolean isBreedingItem(ItemStack itemStack)
     {
-        return itemStack != null && itemStack.getItem() instanceof ItemSeedFood;
+        return itemStack != null && itemStack.getItem() instanceof ItemSeeds;
     }
 
     protected void dropRareDrop(int par1)
