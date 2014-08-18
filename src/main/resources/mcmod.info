@@ -7,8 +7,8 @@
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["Trade12"],
-  "credits": "TheMarkuz(MrAneko) for fixing my derps",
+  "authorList": ["Trade12"],["TheMarkuz"]
+  "credits": "Azanor for Baubles <3",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

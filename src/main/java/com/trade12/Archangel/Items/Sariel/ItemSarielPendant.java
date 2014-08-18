@@ -90,7 +90,7 @@ public class ItemSarielPendant extends Item implements IBauble {
                     {
                         if (player.inventory.getStackInSlot(ia) != null)
                         {
-                            if(player.inventory.getStackInSlot(ia).getUnlocalizedName().equals("item.transposingBattery"))
+                            if(player.inventory.getStackInSlot(ia).getUnlocalizedName().equals("item.SarielPower"))
                             {
                                 if (player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("charge") > 0)
                                 {

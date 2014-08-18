@@ -69,7 +69,7 @@ public class ItemSarielRing extends Item implements IBauble {
                 if (player.inventory.hasItem(ItemLoader.sarielPower)) {
                     for (int ia = 0; ia <= 35; ia++) {
                         if (player.inventory.getStackInSlot(ia) != null) {
-                            if (player.inventory.getStackInSlot(ia).getUnlocalizedName().equals("item.transposingBattery")) {
+                            if (player.inventory.getStackInSlot(ia).getUnlocalizedName().equals("item.SarielPower")) {
                                 if (player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("charge") > 0) {
                                     player.inventory.getStackInSlot(ia).stackTagCompound.setInteger("charge", player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("charge") - 1);
                                     itemStack.stackTagCompound.setInteger("charge", itemStack.stackTagCompound.getInteger("charge") + 1);

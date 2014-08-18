@@ -29,6 +29,8 @@ public class Ref {
     public static final String UNLOCALISED_NATHANIEL_BELT = "nathaniel_Belt";
     public static final String UNLOCALISED_NATHANIEL_PENDANT = "nathaniel_Pendant";
 
+    public static final String UNLOCALISED_AUTOFEEDER_RING = "autoFeeder_Ring";
+
   //Sound
     public static final String SOUND_OSTRICH = ("archangel/sounds/ostrich_say.ogg");
 
