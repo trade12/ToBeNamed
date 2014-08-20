@@ -4,6 +4,8 @@ import com.trade12.Archangel.Items.Angel.ItemAngelBelt;
 import com.trade12.Archangel.Items.Angel.ItemAngelPendant;
 import com.trade12.Archangel.Items.Angel.ItemAngelPower;
 import com.trade12.Archangel.Items.Angel.ItemAngelRing;
+import com.trade12.Archangel.Items.Nathaniel.ItemNathanielBelt;
+import com.trade12.Archangel.Items.Nathaniel.ItemNathanielPendant;
 import com.trade12.Archangel.Items.Nathaniel.ItemNathanielPower;
 import com.trade12.Archangel.Items.Nathaniel.ItemNathanielRing;
 import com.trade12.Archangel.Items.Sariel.ItemSarielBelt;
@@ -39,9 +41,9 @@ public class ItemLoader {
         sarielPendant = new ItemSarielPendant();
         sarielBelt = new ItemSarielBelt();
 
-        //nathanielPendant = new ;
-       // nathanielRing = new ItemNathanielRing();
-       // nathanielBelt = ;
+        nathanielPendant = new ItemNathanielPendant();
+        nathanielRing = new ItemNathanielRing();
+        nathanielBelt = new ItemNathanielBelt();
         nathanielPower = new ItemNathanielPower();
 
 
@@ -54,6 +56,12 @@ public class ItemLoader {
         GameRegistry.registerItem(sarielBelt, "Archangel_sarielBelt");
         GameRegistry.registerItem(sarielPendant, "Archangel_sarielPendant");
         GameRegistry.registerItem(sarielPower, "Archangel_sarielPower");
+
+        GameRegistry.registerItem(nathanielPendant, "Archangel_nathanielPendant");
+        GameRegistry.registerItem(nathanielRing, "Archangel_nathanielRing");
+        GameRegistry.registerItem(nathanielBelt, "Archangel_nathanielBelt");
+        GameRegistry.registerItem(nathanielPower, "Archangel_nathanielPower");
+
 
     }
 }
