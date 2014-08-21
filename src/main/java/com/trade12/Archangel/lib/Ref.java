@@ -29,6 +29,11 @@ public class Ref {
     public static final String UNLOCALISED_NATHANIEL_BELT = "nathaniel_Belt";
     public static final String UNLOCALISED_NATHANIEL_PENDANT = "nathaniel_Pendant";
 
+    public static final String UNLOCALISED_ARIEL_RING = "arielRing";
+    public static final String UNLOCALISED_ARIEL_POWER = "arielPower";
+    public static final String UNLOCALISED_ARIEL_BELT = "arielBelt";
+    public static final String UNLOCALISED_ARIEL_PENDANT = "arielPendant";
+
     //public static final String UNLOCALISED_AUTOFEEDER_RING = "autoFeeder_Ring";
 
     //Ability
