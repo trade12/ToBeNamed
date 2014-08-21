@@ -35,7 +35,13 @@ public class Ref {
     public static final String UNLOCALISED_SECONDARY_ACTIVE = "Secondary Ability Awakened";
     public static final String UNLOCALISED_SECONDARY_DEACTIVE = "Secondary Ability Suppressed";
 
-  //Sound
+
+    //Items
+    public static final String UNLOCALISED_SARIEL_STONE = "sarielStone";
+
+
+
+    //Sound
     public static final String SOUND_OSTRICH = ("archangel/sounds/ostrich_say.ogg");
 
 
