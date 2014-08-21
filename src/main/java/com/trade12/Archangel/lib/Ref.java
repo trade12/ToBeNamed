@@ -49,6 +49,7 @@ public class Ref {
     public static final String UNLOCALISED_BASIC_PENDANT = "basicPendant";
 
     public static final String UNLOCALISED_EMPOWERED_FOCUS = "empoweredFocus";
+    public static final String UNLOCALISED_HEAVEN_DWELL = "heavensDwelling";
 
 
 

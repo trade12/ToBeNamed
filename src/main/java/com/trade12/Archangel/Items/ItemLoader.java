@@ -13,10 +13,7 @@ import com.trade12.Archangel.Items.Sariel.ItemSarielBelt;
 import com.trade12.Archangel.Items.Sariel.ItemSarielPendant;
 import com.trade12.Archangel.Items.Sariel.ItemSarielPower;
 import com.trade12.Archangel.Items.Sariel.ItemSarielRing;
-import com.trade12.Archangel.Items.SubItems.ItemBasicBelt;
-import com.trade12.Archangel.Items.SubItems.ItemBasicPendant;
-import com.trade12.Archangel.Items.SubItems.ItemBasicRing;
-import com.trade12.Archangel.Items.SubItems.ItemEmpoweredFocus;
+import com.trade12.Archangel.Items.SubItems.*;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 
@@ -32,7 +29,7 @@ public class ItemLoader {
     public static Item arielPower, sarielPower, angelPower, nathanielPower;
     public static Item nathanielStone;
 
-    public static Item empoweredFoucs,ostracheFeather;
+    public static Item empoweredFoucs, heavensDwelling,ostracheFeather;
     public static Item basicBelt, basicRing, basicPendant;
 
 
@@ -64,6 +61,7 @@ public class ItemLoader {
         basicPendant = new ItemBasicPendant();
 
         empoweredFoucs = new ItemEmpoweredFocus();
+        heavensDwelling = new ItemHeavensDwelling();
 
 
         GameRegistry.registerItem(angelPendant, "Archangel_angelPendant");
@@ -92,6 +90,7 @@ public class ItemLoader {
         GameRegistry.registerItem(basicPendant, "Archangel_basicPendant");
 
         GameRegistry.registerItem(empoweredFoucs, "Archangel_empoweredFocus");
+        GameRegistry.registerItem(heavensDwelling, "Archangel_heavensDwelling");
 
 
     }
