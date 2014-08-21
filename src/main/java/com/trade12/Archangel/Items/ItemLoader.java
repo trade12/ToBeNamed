@@ -7,11 +7,16 @@ import com.trade12.Archangel.Items.Angel.ItemAngelRing;
 import com.trade12.Archangel.Items.Ariel.ItemArielBelt;
 import com.trade12.Archangel.Items.Ariel.ItemArielPendant;
 import com.trade12.Archangel.Items.Ariel.ItemArielPower;
+import com.trade12.Archangel.Items.Ariel.ItemArielRing;
 import com.trade12.Archangel.Items.Nathaniel.*;
 import com.trade12.Archangel.Items.Sariel.ItemSarielBelt;
 import com.trade12.Archangel.Items.Sariel.ItemSarielPendant;
 import com.trade12.Archangel.Items.Sariel.ItemSarielPower;
 import com.trade12.Archangel.Items.Sariel.ItemSarielRing;
+import com.trade12.Archangel.Items.SubItems.ItemBasicBelt;
+import com.trade12.Archangel.Items.SubItems.ItemBasicPendant;
+import com.trade12.Archangel.Items.SubItems.ItemBasicRing;
+import com.trade12.Archangel.Items.SubItems.ItemEmpoweredFocus;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 
@@ -21,15 +26,14 @@ import net.minecraft.item.Item;
 public class ItemLoader {
 
     public static Item angelPendant, angelRing, angelBelt;
-    public static Item angelPower;
     public static Item sarielRing, sarielPendant, sarielBelt;
-    public static Item sarielPower;
     public static Item nathanielPendant, nathanielRing, nathanielBelt;
-    public static Item nathanielPower;
-    public static Item ostracheFeather;
-    public static Item nathanielStone;
     public static Item arielPendant, arielRing, arielBelt;
-    public static Item arielPower;
+    public static Item arielPower, sarielPower, angelPower, nathanielPower;
+    public static Item nathanielStone;
+
+    public static Item empoweredFoucs,ostracheFeather;
+    public static Item basicBelt, basicRing, basicPendant;
 
 
     public static void load()
@@ -53,6 +57,13 @@ public class ItemLoader {
         arielPower = new ItemArielPower();
         arielBelt = new ItemArielBelt();
         arielPendant = new ItemArielPendant();
+        arielRing = new ItemArielRing();
+
+        basicRing = new ItemBasicRing();
+        basicBelt = new ItemBasicBelt();
+        basicPendant = new ItemBasicPendant();
+
+        empoweredFoucs = new ItemEmpoweredFocus();
 
 
         GameRegistry.registerItem(angelPendant, "Archangel_angelPendant");
@@ -74,6 +85,13 @@ public class ItemLoader {
         GameRegistry.registerItem(arielPower, "Archangel_arielPower");
         GameRegistry.registerItem(arielBelt, "Archangel_arielBelt");
         GameRegistry.registerItem(arielPendant, "Archangel_arielPendant");
+        GameRegistry.registerItem(arielRing, "Archangel_arielRing");
+
+        GameRegistry.registerItem(basicBelt, "Archangel_basicBelt");
+        GameRegistry.registerItem(basicRing, "Archangel_basicRing");
+        GameRegistry.registerItem(basicPendant, "Archangel_basicPendant");
+
+        GameRegistry.registerItem(empoweredFoucs, "Archangel_empoweredFocus");
 
 
     }

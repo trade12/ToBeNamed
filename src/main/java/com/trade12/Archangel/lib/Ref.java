@@ -44,6 +44,12 @@ public class Ref {
     //Items
     public static final String UNLOCALISED_SARIEL_STONE = "sarielStone";
 
+    public static final String UNLOCALISED_BASIC_BELT = "basicBelt";
+    public static final String UNLOCALISED_BASIC_RING = "basicRing";
+    public static final String UNLOCALISED_BASIC_PENDANT = "basicPendant";
+
+    public static final String UNLOCALISED_EMPOWERED_FOCUS = "empoweredFocus";
+
 
 
     //Sound
