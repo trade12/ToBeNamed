@@ -102,7 +102,7 @@ public class EntityOstrich extends EntityAnimal {
 
     protected Item getDropItem()
     {
-        return ItemLoader.ostracheFeather;
+        return ItemLoader.ostrichFeather;
     }
 
     protected void dropFewItems(boolean bool, int nom)
@@ -122,7 +122,7 @@ public class EntityOstrich extends EntityAnimal {
 
     protected void dropRareDrop(int par1)
     {
-        this.dropItem(ItemLoader.ostracheFeather, 1);
+        this.dropItem(ItemLoader.ostrichFeather, 1);
     }
 
 
