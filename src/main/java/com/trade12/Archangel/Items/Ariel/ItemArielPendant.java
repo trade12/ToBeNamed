@@ -5,7 +5,6 @@ import baubles.api.IBauble;
 import com.trade12.Archangel.Archangel;
 import com.trade12.Archangel.Config.ConfigHandler;
 import com.trade12.Archangel.Handler.KeyHandler;
-import com.trade12.Archangel.Items.Angel.ItemAngelPendant;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.relauncher.Side;
@@ -107,25 +106,25 @@ public class ItemArielPendant extends Item implements IBauble {
                     int y = (int) posY;
                     int z = (int) player.posZ;
                     growBlocks(player.worldObj, x, y, z);
-                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") - 10);
+                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") - 50);
                 }
                 if (counter == 100) {
                     counter = 0;
-                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") - 10);
+                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") - 50);
                 }
             }
         }
     }
 
     public void growBlocks(World world, int x, int y, int z) {
-        int range = 5;
+        int range = 2;
         for (int ia = x - range; ia <= x + range; ia++) {
             for (int ib = z - range; ib <= z + range; ib++) {
                 for (int ic = y - range; ic <= y + range; ic++) {
                     Block block = world.getBlock(ia, ic, ib);
                     if (block instanceof IGrowable) {
                         IGrowable plant = (IGrowable) block;
-                        if (world.rand.nextInt(20) == 0) {
+                        if (world.rand.nextInt(20)== 0) {
                             block.updateTick(world, ia, ic, ib, world.rand);
                             plant.func_149853_b(world, world.rand, ia, ic, ib);
                             world.spawnParticle("happyVillager", (double) ia, (double) ic, (double) ib, (double) ia, (double) ic, (double) ib);
@@ -137,13 +136,13 @@ public class ItemArielPendant extends Item implements IBauble {
     }
 
     public void updateBlocks(World world, int x, int y, int z) {
-        int range = 3;
+        int range = 2;
         for (int ia = x - range; ia <= x + range; ia++) {
             for (int ib = z - range; ib <= z + range; ib++) {
                 for (int ic = y - range; ic <= y + range; ic++) {
                     Block block = world.getBlock(ia, ic, ib);
                     if (block instanceof IPlantable) {
-                        if (world.rand.nextInt(20) == 0) {
+                        if (world.rand.nextInt() == 0) {
                             block.updateTick(world, ia, ic, ib, world.rand);
                         }
                     }

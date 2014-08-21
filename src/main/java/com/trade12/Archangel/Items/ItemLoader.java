@@ -5,6 +5,7 @@ import com.trade12.Archangel.Items.Angel.ItemAngelPendant;
 import com.trade12.Archangel.Items.Angel.ItemAngelPower;
 import com.trade12.Archangel.Items.Angel.ItemAngelRing;
 import com.trade12.Archangel.Items.Ariel.ItemArielBelt;
+import com.trade12.Archangel.Items.Ariel.ItemArielPendant;
 import com.trade12.Archangel.Items.Ariel.ItemArielPower;
 import com.trade12.Archangel.Items.Nathaniel.*;
 import com.trade12.Archangel.Items.Sariel.ItemSarielBelt;
@@ -51,6 +52,7 @@ public class ItemLoader {
 
         arielPower = new ItemArielPower();
         arielBelt = new ItemArielBelt();
+        arielPendant = new ItemArielPendant();
 
 
         GameRegistry.registerItem(angelPendant, "Archangel_angelPendant");
@@ -71,6 +73,7 @@ public class ItemLoader {
 
         GameRegistry.registerItem(arielPower, "Archangel_arielPower");
         GameRegistry.registerItem(arielBelt, "Archangel_arielBelt");
+        GameRegistry.registerItem(arielPendant, "Archangel_arielPendant");
 
 
     }
