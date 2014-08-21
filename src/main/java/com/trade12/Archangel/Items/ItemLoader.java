@@ -29,7 +29,7 @@ public class ItemLoader {
     public static Item arielPower, sarielPower, angelPower, nathanielPower;
     public static Item nathanielStone;
 
-    public static Item empoweredFoucs, heavensDwelling,ostracheFeather;
+    public static Item empoweredFoucs, heavensDwelling, ostrichFeather, angelPillow, angelSilk, fishBones, dormantCrystal, damagedHalo, angelPurity, pureSeed, pebbles;
     public static Item basicBelt, basicRing, basicPendant;
 
 
@@ -62,6 +62,16 @@ public class ItemLoader {
 
         empoweredFoucs = new ItemEmpoweredFocus();
         heavensDwelling = new ItemHeavensDwelling();
+        angelPillow = new ItemAngelPillow();
+        angelPillow.setUnlocalizedName("angelPillow");
+        angelSilk = new ItemAngelSilk();
+        ostrichFeather = new ItemOFeather();
+        fishBones = new ItemFishBones();
+        dormantCrystal = new ItemDormantCrystal();
+        damagedHalo = new ItemDamagedHalo();
+        angelPurity = new ItemAngelPurity();
+        pureSeed = new ItemPureSeeds();
+        pebbles = new ItemPebbles();
 
 
         GameRegistry.registerItem(angelPendant, "Archangel_angelPendant");
@@ -91,7 +101,15 @@ public class ItemLoader {
 
         GameRegistry.registerItem(empoweredFoucs, "Archangel_empoweredFocus");
         GameRegistry.registerItem(heavensDwelling, "Archangel_heavensDwelling");
-
+        GameRegistry.registerItem(angelPillow, "Archangel_angelPillow");
+        GameRegistry.registerItem(angelSilk, "Archangel_angelSilk");
+        GameRegistry.registerItem(ostrichFeather, "Archangel_ostrichFeather");
+        GameRegistry.registerItem(fishBones, "Archangel_fishBones");
+        GameRegistry.registerItem(dormantCrystal, "Archangel_dormantCrystal");
+        GameRegistry.registerItem(damagedHalo, "Archangel_damagedHalo");
+        GameRegistry.registerItem(angelPurity, "Archangel_angelPurity");
+        GameRegistry.registerItem(pureSeed, "Archangel_pureSeed");
+        GameRegistry.registerItem(pebbles, "Archangel_Pebbles");
 
     }
 }

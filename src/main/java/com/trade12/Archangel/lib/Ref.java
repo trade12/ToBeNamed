@@ -50,6 +50,15 @@ public class Ref {
 
     public static final String UNLOCALISED_EMPOWERED_FOCUS = "empoweredFocus";
     public static final String UNLOCALISED_HEAVEN_DWELL = "heavensDwelling";
+    public static final String[] UNLOCALISED_ANGEL_PILLOW = new String[] {"empty","full"};
+    public static final String UNLOCALISED_ANGEL_SILK = "angelSilk";
+    public static final String UNLOCALISED_OFEATHER = "ostrachFeather";
+    public static final String UNLOCALISED_FISH_BONES = "fishBones";
+    public static final String UNLOCALISED_DORMANT_CRYSTAL = "dormantCrystal";
+    public static final String UNLOCALISED_DAMAGED_HALO = "damagedHalo";
+    public static final String UNLOCALISED_ANGEL_PURITY = "angelPurity";
+    public static final String UNLOCALISED_PURE_SEED = "pureSeed";
+    public static final String UNLOCALISED_PEBBLES = "pebbles";
 
 
 
