@@ -127,7 +127,7 @@ public class ItemAngelPendant extends Item implements IBauble {
         }
         if (!active)
         {
-            info.add(EnumChatFormatting.DARK_PURPLE + "Secondary Ability Suppressed");
+            info.add(EnumChatFormatting.WHITE + "Secondary Ability Suppressed");
         }
     }
 

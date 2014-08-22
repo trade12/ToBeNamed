@@ -62,7 +62,7 @@ public class ItemArielPendant extends Item implements IBauble {
             info.add(EnumChatFormatting.DARK_PURPLE + Ref.UNLOCALISED_SECONDARY_ACTIVE);
         }
         if (!active) {
-            info.add(EnumChatFormatting.DARK_PURPLE + Ref.UNLOCALISED_SECONDARY_DEACTIVE);
+            info.add(EnumChatFormatting.WHITE + Ref.UNLOCALISED_SECONDARY_DEACTIVE);
         }
     }
 
@@ -97,7 +97,7 @@ public class ItemArielPendant extends Item implements IBauble {
                 }
             }
 
-            if (itemStack.stackTagCompound.getInteger("Charge") >= 10) {
+            if (itemStack.stackTagCompound.getInteger("Charge") >= 350) {
                 updateBlocks(player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
                 counter++;
                 if (KeyHandler.pendant) {
@@ -106,11 +106,11 @@ public class ItemArielPendant extends Item implements IBauble {
                     int y = (int) posY;
                     int z = (int) player.posZ;
                     growBlocks(player.worldObj, x, y, z);
-                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") - 50);
+                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") - 250);
                 }
                 if (counter == 100) {
                     counter = 0;
-                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") - 50);
+                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") - 250);
                 }
             }
         }

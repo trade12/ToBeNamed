@@ -64,7 +64,7 @@ public class ItemNathanielBelt extends Item implements IBauble {
         }
         if (!active)
         {
-            info.add(EnumChatFormatting.DARK_PURPLE + Ref.UNLOCALISED_SECONDARY_DEACTIVE);
+            info.add(EnumChatFormatting.WHITE + Ref.UNLOCALISED_SECONDARY_DEACTIVE);
         }
     }
 

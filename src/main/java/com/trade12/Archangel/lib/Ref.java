@@ -26,7 +26,7 @@ public class Ref {
 
     public static final String UNLOCALISED_NATHANIEL_RING = "nathanielRing";
     public static final String UNLOCALISED_NATHANIEL_POWER = "nathanielPower";
-    public static final String UNLOCALISED_NATHANIEL_BELT = "nathaniel_Belt";
+    public static final String UNLOCALISED_NATHANIEL_BELT = "nathanielBelt";
     public static final String UNLOCALISED_NATHANIEL_PENDANT = "nathaniel_Pendant";
 
     public static final String UNLOCALISED_ARIEL_RING = "arielRing";
@@ -48,11 +48,11 @@ public class Ref {
     public static final String UNLOCALISED_BASIC_RING = "basicRing";
     public static final String UNLOCALISED_BASIC_PENDANT = "basicPendant";
 
-    public static final String UNLOCALISED_EMPOWERED_FOCUS = "empoweredFocus";
+    public static final String UNLOCALISED_EMPOWERED_FOCUS = "eFocus";
     public static final String UNLOCALISED_HEAVEN_DWELL = "heavensDwelling";
     public static final String[] UNLOCALISED_ANGEL_PILLOW = new String[] {"empty","full"};
     public static final String UNLOCALISED_ANGEL_SILK = "angelSilk";
-    public static final String UNLOCALISED_OFEATHER = "ostrachFeather";
+    public static final String UNLOCALISED_OFEATHER = "ostrichFeather";
     public static final String UNLOCALISED_FISH_BONES = "fishBones";
     public static final String UNLOCALISED_DORMANT_CRYSTAL = "dormantCrystal";
     public static final String UNLOCALISED_DAMAGED_HALO = "damagedHalo";
