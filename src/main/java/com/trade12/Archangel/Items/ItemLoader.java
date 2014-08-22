@@ -28,7 +28,7 @@ public class ItemLoader {
     public static Item arielPendant, arielRing, arielBelt;
     public static Item arielPower, sarielPower, angelPower, nathanielPower;
     public static Item nathanielStone;
-
+    public static Item angelWhistle;
     public static Item empoweredFoucs, heavensDwelling, ostrichFeather, angelPillow, angelSilk, fishBones, dormantCrystal, damagedHalo, angelPurity, pureSeed, pebbles;
     public static Item basicBelt, basicRing, basicPendant;
 
@@ -72,6 +72,7 @@ public class ItemLoader {
         angelPurity = new ItemAngelPurity();
         pureSeed = new ItemPureSeeds();
         pebbles = new ItemPebbles();
+        angelWhistle = new AngelWhistle();
 
 
         GameRegistry.registerItem(angelPendant, "Archangel_angelPendant");
@@ -110,6 +111,7 @@ public class ItemLoader {
         GameRegistry.registerItem(angelPurity, "Archangel_angelPurity");
         GameRegistry.registerItem(pureSeed, "Archangel_pureSeed");
         GameRegistry.registerItem(pebbles, "Archangel_Pebbles");
+        GameRegistry.registerItem(angelWhistle, "Archangel_Whistle");
 
     }
 }
