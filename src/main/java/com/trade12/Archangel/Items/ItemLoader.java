@@ -72,7 +72,7 @@ public class ItemLoader {
         angelPurity = new ItemAngelPurity();
         pureSeed = new ItemPureSeeds();
         pebbles = new ItemPebbles();
-        angelWhistle = new AngelWhistle();
+       // angelWhistle = new AngelWhistle();
 
 
         GameRegistry.registerItem(angelPendant, "Archangel_angelPendant");
@@ -111,7 +111,7 @@ public class ItemLoader {
         GameRegistry.registerItem(angelPurity, "Archangel_angelPurity");
         GameRegistry.registerItem(pureSeed, "Archangel_pureSeed");
         GameRegistry.registerItem(pebbles, "Archangel_Pebbles");
-        GameRegistry.registerItem(angelWhistle, "Archangel_Whistle");
+    //    GameRegistry.registerItem(angelWhistle, "Archangel_Whistle");
 
     }
 }

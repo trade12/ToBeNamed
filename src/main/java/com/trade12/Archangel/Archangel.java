@@ -47,6 +47,7 @@ public class Archangel {
         proxy.initRenders();
         RecipeHandler.initRecipes();
 
+
     }
 
     @SideOnly(Side.CLIENT)
