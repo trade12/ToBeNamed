@@ -5,6 +5,7 @@ import com.trade12.Archangel.Handler.KeyHandler;
 import com.trade12.Archangel.Handler.RecipeHandler;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.Proxy.CommonProxy;
+import com.trade12.Archangel.entity.EntityDeathAngel;
 import com.trade12.Archangel.entity.EntityHandler;
 import com.trade12.Archangel.entity.EntityOstrich;
 import com.trade12.Archangel.lib.Ref;
@@ -43,7 +44,8 @@ public class Archangel {
     {
         ConfigHandler.init(event.getSuggestedConfigurationFile());
         ItemLoader.load();
-        EntityHandler.registerEntityWithOstrachSpawns(EntityOstrich.class, "entityOstrach", 0x663300, 0x996600, 5, 20, 500);
+        EntityHandler.registerEntityWithOstrachSpawns(EntityOstrich.class, "entityOstrach", 0x663300, 0x996600, 1, 2, 100);
+        EntityHandler.registerEntityWithDeathAngelSpawns(EntityDeathAngel.class, "entityDeathAngel", 0x996600, 0x663300, 1, 2, 100);
         proxy.initRenders();
         RecipeHandler.initRecipes();
 

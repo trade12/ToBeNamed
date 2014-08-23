@@ -6,6 +6,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.BiomeGenHell;
 
 import java.util.Random;
 
@@ -52,6 +53,17 @@ public class EntityHandler
         EntityRegistry.addSpawn(entityClass, rarity, min, max, EnumCreatureType.creature, BiomeGenBase.forestHills);
         EntityRegistry.addSpawn(entityClass, rarity, min, max, EnumCreatureType.creature, BiomeGenBase.roofedForest);
         EntityList.entityEggs.put(Integer.valueOf(entityID), new EntityList.EntityEggInfo(entityID, primaryColour, secondaryColour));
+    }
+
+    public static void registerEntityWithDeathAngelSpawns(Class entityClass, String name, int primaryColour, int secondaryColour, int min, int max, int rarity)
+    {
+        int entityID = EntityRegistry.findGlobalUniqueEntityId();
+        long seed = name.hashCode();
+        Random rand = new Random(seed);
+
+        EntityRegistry.registerGlobalEntityID(entityClass, name, entityID);
+        EntityRegistry.registerModEntity(entityClass, name, entityID, instance, 64, 1, true);
+        EntityRegistry.addSpawn(entityClass,rarity,min,max, EnumCreatureType.creature, BiomeGenBase.hell);
     }
 
 

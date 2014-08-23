@@ -1,8 +1,6 @@
 package com.trade12.Archangel.Proxy;
 
-import com.trade12.Archangel.entity.EntityOstrich;
-import com.trade12.Archangel.entity.ModelOstrich;
-import com.trade12.Archangel.entity.RenderOstrich;
+import com.trade12.Archangel.entity.*;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -20,5 +18,6 @@ public class ClientProxy extends CommonProxy {
     public void initRenders()
     {
         RenderingRegistry.registerEntityRenderingHandler(EntityOstrich.class, new RenderOstrich(new ModelOstrich(), 0.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityDeathAngel.class, new RenderDeathAngel(new ModelDeathAngel(), 0.5F));
     }
 }
