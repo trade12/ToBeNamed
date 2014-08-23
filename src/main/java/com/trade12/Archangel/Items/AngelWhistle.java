@@ -25,7 +25,11 @@ public class AngelWhistle extends Item {
     public AngelWhistle()
     {
         this.maxStackSize = 1;
-        onEaten(1);
+    }
+
+    public ItemStack onEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer)
+    {
+        return itemStack.onFoodEaten(world,entityPlayer);
     }
 
     public ItemStack onPlayerStoppedUsing(ItemStack itemStack, World world, EntityPlayer entity)
@@ -39,15 +43,15 @@ public class AngelWhistle extends Item {
                 if ((world.notifyBlocksOfNeighborChange().getBiomeGenAt(0, 0) instanceof BiomeGenEnd))
                 {
                     if (isDragonAlive(world) >= 1) {
-                        entity.func_145747_a(new ChatComponentText(LanguageRegistry.instance().getStringLocalization("whistle.dragonExist." + rand.nextInt(4))));
+                        entity.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization("whistle.dragonExist." + rand.nextInt(4))));
                     }
                 }
                 else {
-                    entity.func_145747_a(new ChatComponentText(LanguageRegistry.instance().getStringLocalization("whistle.tips." + rand.nextInt(3))));
+                    entity.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization("whistle.tips." + rand.nextInt(3))));
                 }
             }
         }
-        entity.func_71008_a(itemStack, getItemStackLimit(itemStack));
+        entity.getCurrentEquippedItem();
         return itemStack;
     }
 
@@ -102,4 +106,5 @@ public class AngelWhistle extends Item {
 
 
 }
-*/
+
+**/

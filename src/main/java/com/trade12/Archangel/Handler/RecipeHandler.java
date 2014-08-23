@@ -22,6 +22,10 @@ public class RecipeHandler {
         //Angel
         GameRegistry.addRecipe(new ItemStack(ItemLoader.angelPillow), "YXY", "X X", "XXX", 'X', Blocks.glass_pane, 'Y', Blocks.planks);
         GameRegistry.addRecipe(new ItemStack(ItemLoader.angelSilk, 4), "XXX", "XYX", "XXX",'X', Blocks.wool, 'Y',ItemLoader.angelPillow);
+        GameRegistry.addRecipe(new ItemStack(ItemLoader.angelRing), " X ", "YWY", "ZZZ", 'X', Items.emerald, 'Y', ItemLoader.cloudCloth, 'Z', ItemLoader.ostrichFeather, 'W', ItemLoader.basicRing);
+        GameRegistry.addRecipe(new ItemStack(ItemLoader.angelBelt), "ZZZ", "YWY", " X ", 'X', Items.emerald, 'Y', ItemLoader.cloudCloth, 'Z', ItemLoader.ostrichFeather, 'W', ItemLoader.basicBelt);
+        GameRegistry.addRecipe(new ItemStack(ItemLoader.angelPendant), "ZZ ", "YWY", " YX", 'X', Items.emerald, 'Y', ItemLoader.cloudCloth, 'Z', ItemLoader.ostrichFeather, 'W', ItemLoader.basicPendant);
+  //      GameRegistry.addRecipe(new ItemStack(ItemLoader.angelPower), "X", "Y", 'X', ItemLoader.ostrichFeather, 'Y', ItemLoader.);
 
 
 
