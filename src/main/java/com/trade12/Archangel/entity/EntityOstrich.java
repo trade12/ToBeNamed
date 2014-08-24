@@ -83,22 +83,23 @@ public class EntityOstrich extends EntityAnimal {
     protected void fall(float x) {}
     protected String getLivingSound()
     {
-        return ("archangel/sounds/ostrich_say.ogg"); //todo fix sound
+        return ("archangel:ostrichSay"); //todo fix sound
     }
     protected String getHurtSound()
 
     {
-        return ("archangel/sounds/ostrich_say.ogg");
+        return ("archangel:ostrichSay");
     }
     protected String getDeathSound()
     {
-        return "mob.chicken.hurt";
+        return "archangel:ostrichSay";
     }
 
-    protected void func_145780_a(int x, int y, int z, Blocks block)
+  /**  protected void func_145780_a(int x, int y, int z, Blocks block)
     {
         this.playSound("mob.chicken.step", 0.15F, 1.0F);
     }
+**/
 
     protected Item getDropItem()
     {

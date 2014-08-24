@@ -7,6 +7,8 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.monster.EntityBlaze;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.init.Blocks;
@@ -14,19 +16,21 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemSeeds;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 /**
  * Created by Kieran on 23/08/2014.
  */
-public class EntityDeathAngel extends EntityBlaze {
+public class EntityDeathAngel extends EntityZombie {
 
     public float field_70886_e;
     public float destPos;
     public float field_70884_g;
     public float field_70888_h;
     public float field_70889_i = 1.0F;
+
     public EntityDeathAngel(World world)
     {
         super(world);
@@ -34,7 +38,15 @@ public class EntityDeathAngel extends EntityBlaze {
         this.tasks.addTask(5, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(7, new EntityAILookIdle(this));
+        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, EntityPlayer.class, this.getAIMoveSpeed(),false));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, false));
+        this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
+        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
+        this.tasks.addTask(8, new EntityAILookIdle(this));
     }
+
 
     public boolean isAIEnabled()
     {
@@ -46,7 +58,7 @@ public class EntityDeathAngel extends EntityBlaze {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
         this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(5.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
     }
 
  /**   protected void entityInit()
@@ -54,6 +66,12 @@ public class EntityDeathAngel extends EntityBlaze {
         super.entityInit();
         this.dataWatcher.addObject(16, new Byte((byte)0));
     }**/
+
+   /** public void getMaxSafePointTries(DamageSource par1DamageSource)
+    {
+         super.getMaxSafePointTries(par1DamageSource);
+    }
+    **/
 
     public void onLivingUpdate()
     {
@@ -90,16 +108,16 @@ public class EntityDeathAngel extends EntityBlaze {
     protected void fall(float x) {}
     protected String getLivingSound()
     {
-        return ("archangel/sounds/ostrich_say.ogg"); //todo fix sound
+        return ("archangel:DeathAngel"); //todo fix sound
     }
     protected String getHurtSound()
 
     {
-        return ("archangel/sounds/ostrich_say.ogg");
+        return ("archangel:DeathAngelHurt");
     }
     protected String getDeathSound()
     {
-        return "mob.chicken.hurt";
+        return "archangel:DeathAngelDeath";
     }
 
 
