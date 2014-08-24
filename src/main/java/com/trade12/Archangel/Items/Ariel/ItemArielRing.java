@@ -4,6 +4,8 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import com.trade12.Archangel.Archangel;
 import com.trade12.Archangel.Config.ConfigHandler;
+import com.trade12.Archangel.Handler.ChargeHandler;
+import com.trade12.Archangel.Handler.PowerHandler;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.relauncher.Side;
@@ -23,6 +25,7 @@ import java.util.List;
  */
 public class ItemArielRing extends Item implements IBauble {
 
+    int counter;
     public ItemArielRing()
     {
         this.setMaxStackSize(1);
@@ -40,10 +43,7 @@ public class ItemArielRing extends Item implements IBauble {
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean useInfo) {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        itemStack.stackTagCompound.setInteger("Charge", 0);
+        ChargeHandler.setCharge(itemStack, 0);
     }
 
     @Override
@@ -58,43 +58,27 @@ public class ItemArielRing extends Item implements IBauble {
         if (entity instanceof EntityPlayer)
         {
             EntityPlayer player = (EntityPlayer)entity;
-            if (itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge && player.worldObj.canBlockSeeTheSky((int) player.posX, (int) player.posY-1, (int) player.posZ) && player.worldObj.getWorldTime() > 0 && player.worldObj.getWorldTime() < 13000)
-            {
-                if (itemStack.stackTagCompound == null)
-                    itemStack.setTagCompound(new NBTTagCompound());
 
-                itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge")+1);
+            if (ChargeHandler.canFloralCharge(itemStack, entity))
+            {
+                ChargeHandler.addCharge(itemStack, 1);
             }
 
-            if (itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge)
+            if (ChargeHandler.hasRoomForCharge(itemStack))
             {
-                if (player.inventory.hasItem(ItemLoader.arielPower))
-                {
-                    for (int ia = 0; ia <= 35; ia++)
-                    {
-                        if (player.inventory.getStackInSlot(ia) != null)
-                        {
-                            if(player.inventory.getStackInSlot(ia).getUnlocalizedName().equals("item.arielPower"))
-                            {
-                                if (player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("Charge") > 0)
-                                {
-                                    player.inventory.getStackInSlot(ia).stackTagCompound.setInteger("Charge", player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("Charge")-1);
-                                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge")+1);
-                                }
-                            }
-                        }
-                    }
-                }
+                PowerHandler.drainFromBatteryIfPossible(itemStack, player, ItemLoader.arielPower);
             }
 
-            if (itemStack.stackTagCompound.getInteger("Charge") >= 10)
+            if (ChargeHandler.hasEnoughChargeForOperation(itemStack, 10))
             {
                 if (player.getAbsorptionAmount() < 20)
                 {
-                    if (player.getAbsorptionAmount() < 10)
+                    counter++;
+                    if (player.getAbsorptionAmount() < 10 && counter > 250)
                     {
                         player.setAbsorptionAmount(10);
-                        itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge")-10);
+                        ChargeHandler.removeCharge(itemStack, 10);
+                        counter = 0;
                     }
                 }
             }

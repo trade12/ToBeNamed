@@ -4,7 +4,9 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import com.trade12.Archangel.Archangel;
 import com.trade12.Archangel.Config.ConfigHandler;
+import com.trade12.Archangel.Handler.ChargeHandler;
 import com.trade12.Archangel.Handler.KeyHandler;
+import com.trade12.Archangel.Handler.PowerHandler;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.relauncher.Side;
@@ -30,8 +32,8 @@ public class ItemArielBelt extends Item implements IBauble {
     boolean active;
     int counter;
     int counter2; //because im lazy
-    public ItemArielBelt()
-    {
+
+    public ItemArielBelt() {
         this.setMaxStackSize(1);
         this.setCreativeTab(Archangel.tabCustom);
         this.setUnlocalizedName(Ref.UNLOCALISED_ARIEL_BELT);
@@ -39,112 +41,85 @@ public class ItemArielBelt extends Item implements IBauble {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void registerIcons(IIconRegister register)
-    {
+    public void registerIcons(IIconRegister register) {
         this.itemIcon = register.registerIcon(Ref.MOD_ID + ":" + Ref.UNLOCALISED_ARIEL_BELT);
     }
 
-    public void onCreated(ItemStack itemStack, World world, EntityPlayer player)
-    {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        itemStack.stackTagCompound.setInteger("Charge",0);
+    public void onCreated(ItemStack itemStack, World world, EntityPlayer player) {
+        ChargeHandler.setCharge(itemStack, 0);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer entity, List info, boolean useInfo)
-    {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        info.add("Current Charge:" + itemStack.stackTagCompound.getInteger("Charge"));
-        if (active)
-        {
-            info.add(EnumChatFormatting.DARK_PURPLE + Ref.UNLOCALISED_SECONDARY_ACTIVE);
-        }
-        if (!active)
-        {
-            info.add(EnumChatFormatting.WHITE + Ref.UNLOCALISED_SECONDARY_DEACTIVE);
-        }
-        
+    public void addInformation(ItemStack itemStack, EntityPlayer entity, List info, boolean useInfo) {
+        ChargeHandler.addTooltipChargeInformation(itemStack, info);
+        ChargeHandler.addSecondaryAbilityInformation(active, info);
     }
 
 
     @Override
     public void onWornTick(ItemStack itemStack, EntityLivingBase entity) {
         if (entity instanceof EntityPlayer) {
-            if (itemStack.stackTagCompound == null)
-                itemStack.setTagCompound(new NBTTagCompound());
-
             EntityPlayer player = (EntityPlayer) entity;
-            if (itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge && player.worldObj.canBlockSeeTheSky((int) player.posX, (int) player.posY - 1, (int) player.posZ) && player.worldObj.getWorldTime() > 0 && player.worldObj.getWorldTime() < 13000) {
-                itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") + 1);
+
+            if (ChargeHandler.canFloralCharge(itemStack, entity)) {
+                ChargeHandler.addCharge(itemStack, 1);
             }
 
-            if (itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge) {
-                if (player.inventory.hasItem(ItemLoader.arielPower)) {
-                    for (int ia = 0; ia <= 35; ia++) {
-                        if (player.inventory.getStackInSlot(ia) != null) {
-                            if (player.inventory.getStackInSlot(ia).getUnlocalizedName().equals("item.arielPower")) {
-                                if (player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("Charge") > 0) {
-                                    player.inventory.getStackInSlot(ia).stackTagCompound.setInteger("Charge", player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("Charge") - 1);
-                                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") + 1);
-                                }
-                            }
-                        }
-                    }
-                }
+            if (ChargeHandler.hasRoomForCharge(itemStack)) {
+                PowerHandler.drainFromBatteryIfPossible(itemStack, player, ItemLoader.arielPower);
             }
 
-            if (KeyHandler.belt) {
-                active = true;
-            }
-            if (!KeyHandler.belt) {
-                active = false;
-            }
-            if (itemStack.stackTagCompound.getInteger("Charge") > 0) {
-                int x = (int) Math.round(player.posX - 0.5F);
-                int y = (int) player.posY;
-                int z = (int) Math.round(player.posZ - 0.5F); //todo test these amounts
-                int random = (int) (Math.random() * ((5) + 1));
-                if (player.isCollidedHorizontally) ;
-                {
+            if (ChargeHandler.hasEnoughChargeForOperation(itemStack, 5)) {
+                if (player.isCollidedHorizontally) {
                     player.addVelocity(0, 0.1, 0);
                     counter2++;
+                    if (counter2 == 50) {
+                        ChargeHandler.removeCharge(itemStack, 5);
+                    }
                 }
-                if (counter2 == 50) {
-                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") - 5);
-                }
-                if (KeyHandler.belt && itemStack.stackTagCompound.getInteger("Charge") >= 250) {
-                    counter++;
-                }
+            }
+
+            if (KeyHandler.belt && ChargeHandler.hasEnoughChargeForOperation(itemStack, 25)) {
+                active = true;
+                active = true;
+                int x = (int) Math.round(player.posX - 0.5F);
+                int y = (int) player.posY;
+                int z = (int) Math.round(player.posZ - 0.5F);
+                int random = (int) (Math.random() * ((5) + 1));
+                counter++;
+
                 if (counter == 250) {
                     if (random == 0) {
-                        spawnPig(player.worldObj, x, y, z);
-                    }
-                    if (random == 1) {
-                        spawnHorse(player.worldObj, x, y, z);
-                    }
-                    if (random == 2) {
                         spawnChicken(player.worldObj, x, y, z);
                     }
-                    if (random == 3) {
-                        spawnSquid(player.worldObj, x, y, z);
+                    if (random == 1) {
+                        spawnPig(player.worldObj, x, y, z);
                     }
-                    if (random == 4) {
+                    if (random == 2) {
                         spawnCow(player.worldObj, x, y, z);
                     }
-                    if (random == 5) {
+                    if (random == 3) {
                         spawnSheep(player.worldObj, x, y, z);
                     }
-                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") - 10);
+                    if (random == 4) {
+                        spawnHorse(player.worldObj, x, y, z);
+                    }
+                    if (random == 5) {
+                        spawnSquid(player.worldObj, x, y, z);
+                    }
+                    ChargeHandler.removeCharge(itemStack, 25);
                     counter = 0;
                 }
             }
+
+        if (!KeyHandler.belt) {
+            active = false;
         }
+
     }
+
+}
 
     public void spawnPig(World world, int x, int y, int z)
     {

@@ -2,6 +2,7 @@ package com.trade12.Archangel.Items.Ariel;
 
 import com.trade12.Archangel.Archangel;
 import com.trade12.Archangel.Config.ConfigHandler;
+import com.trade12.Archangel.Handler.ChargeHandler;
 import com.trade12.Archangel.Handler.MathHandler;
 import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.relauncher.Side;
@@ -37,19 +38,13 @@ public class ItemArielPower extends Item {
 
     public void onCreated(ItemStack itemStack, World world, EntityPlayer player)
     {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        itemStack.stackTagCompound.setInteger("Charge",0);
+        ChargeHandler.setCharge(itemStack, 0);
     }
 
     public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean useInfo)
     {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        info.add("Current Charge: " + itemStack.stackTagCompound.getInteger("Charge"));
-        info.add("Portable Energy Source for your mystical  items!");
+        ChargeHandler.addTooltipChargeInformation(itemStack, info);
+        info.add(Ref.UNLOCALISED_POWER_DESC);
     }
 
     public void onUpdate(ItemStack itemStack, World world, Entity entity, int ia, boolean ba)

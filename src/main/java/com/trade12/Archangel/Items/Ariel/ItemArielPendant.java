@@ -4,7 +4,9 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import com.trade12.Archangel.Archangel;
 import com.trade12.Archangel.Config.ConfigHandler;
+import com.trade12.Archangel.Handler.ChargeHandler;
 import com.trade12.Archangel.Handler.KeyHandler;
+import com.trade12.Archangel.Handler.PowerHandler;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.relauncher.Side;
@@ -44,73 +46,61 @@ public class ItemArielPendant extends Item implements IBauble {
     }
 
     public void onCreated(ItemStack itemStack, World world, EntityPlayer player) {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
 
-        itemStack.stackTagCompound.setInteger("Charge", 0);
+        ChargeHandler.setCharge(itemStack, 0);
     }
 
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean useInfo) {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean useInfo)
+    {
+        ChargeHandler.addTooltipChargeInformation(itemStack, info);
+        ChargeHandler.addSecondaryAbilityInformation(active,info);
 
-        info.add("Current Charge: " + itemStack.stackTagCompound.getInteger("Charge"));
-        if (active) {
-            info.add(EnumChatFormatting.DARK_PURPLE + Ref.UNLOCALISED_SECONDARY_ACTIVE);
-        }
-        if (!active) {
-            info.add(EnumChatFormatting.WHITE + Ref.UNLOCALISED_SECONDARY_DEACTIVE);
-        }
     }
 
     @Override
     public void onWornTick(ItemStack itemStack, EntityLivingBase entity) {
-        if (entity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) entity;
-            if (itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge && player.worldObj.canBlockSeeTheSky((int) player.posX, (int) player.posY - 1, (int) player.posZ) && player.worldObj.getWorldTime() > 0 && player.worldObj.getWorldTime() < 13000) {
-                if (itemStack.stackTagCompound == null)
-                    itemStack.setTagCompound(new NBTTagCompound());
+        if (entity instanceof EntityPlayer)
+        {
+            EntityPlayer player = (EntityPlayer)entity;
 
-                itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") + 1);
-            }
-            if (KeyHandler.pendant) {
-                active = true;
-            }
-            if (!KeyHandler.pendant) {
-                active = false;
-            }
-            if (itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge) {
-                if (player.inventory.hasItem(ItemLoader.arielPower)) {
-                    for (int ia = 0; ia <= 35; ia++) {
-                        if (player.inventory.getStackInSlot(ia) != null) {
-                            if (player.inventory.getStackInSlot(ia).getUnlocalizedName().equals("item.arielPower")) {
-                                if (player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("Charge") > 0) {
-                                    player.inventory.getStackInSlot(ia).stackTagCompound.setInteger("Charge", player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("Charge") - 1);
-                                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") + 1);
-                                }
-                            }
-                        }
-                    }
-                }
+            if (ChargeHandler.canFloralCharge(itemStack, entity))
+            {
+                ChargeHandler.addCharge(itemStack, 1);
             }
 
-            if (itemStack.stackTagCompound.getInteger("Charge") >= 350) {
+            if (ChargeHandler.hasRoomForCharge(itemStack))
+            {
+                PowerHandler.drainFromBatteryIfPossible(itemStack, player, ItemLoader.arielPower);
+            }
+
+            if (ChargeHandler.hasEnoughChargeForOperation(itemStack, 10))
+            {
                 updateBlocks(player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
                 counter++;
-                if (KeyHandler.pendant) {
-                    double posY = player.posY - 1.5;
+
+                if (counter == 100)
+                {
+                    counter = 0;
+                    ChargeHandler.removeCharge(itemStack, 10);
+                }
+
+                if (KeyHandler.pendant && ChargeHandler.hasEnoughChargeForOperation(itemStack, 10))
+                {
+                    active = true;
+                    double posY = player.posY-1.5;
                     int x = (int) player.posX;
                     int y = (int) posY;
                     int z = (int) player.posZ;
                     growBlocks(player.worldObj, x, y, z);
-                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") - 250);
+                    ChargeHandler.removeCharge(itemStack, 10);
                 }
-                if (counter == 100) {
-                    counter = 0;
-                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") - 250);
+
+                if (!KeyHandler.pendant)
+                {
+                    active = false;
                 }
             }
         }
