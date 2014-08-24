@@ -70,7 +70,7 @@ public class ItemSarielBelt extends Item implements IBauble {
         if (entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
 
-            if (ChargeHandler.canTransposingCharge(itemStack, entity)) {
+            if (ChargeHandler.canSarielCharge(itemStack, entity)) {
                 ChargeHandler.addCharge(itemStack, 1);
             }
 

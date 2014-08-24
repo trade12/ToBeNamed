@@ -51,7 +51,7 @@ public class ItemAngelPendant extends Item implements IBauble {
         {
             EntityPlayer player = (EntityPlayer)entity;
 
-            if (ChargeHandler.canWindmakersCharge(itemStack, (int) player.posY))
+            if (ChargeHandler.canAngelCharge(itemStack, (int) player.posY))
             {
                 ChargeHandler.addCharge(itemStack, 1);
             }

@@ -46,6 +46,7 @@ public class ItemArielBelt extends Item implements IBauble {
     }
 
     public void onCreated(ItemStack itemStack, World world, EntityPlayer player) {
+
         ChargeHandler.setCharge(itemStack, 0);
     }
 
@@ -62,7 +63,7 @@ public class ItemArielBelt extends Item implements IBauble {
         if (entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
 
-            if (ChargeHandler.canFloralCharge(itemStack, entity)) {
+            if (ChargeHandler.canArielCharge(itemStack, entity)) {
                 ChargeHandler.addCharge(itemStack, 1);
             }
 

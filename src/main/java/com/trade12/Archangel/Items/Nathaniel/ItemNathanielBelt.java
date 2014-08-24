@@ -65,7 +65,7 @@ public class ItemNathanielBelt extends Item implements IBauble {
         {
             EntityPlayer player = (EntityPlayer)entity;
 
-            if (ChargeHandler.canInfernalCharge(itemStack, entity))
+            if (ChargeHandler.canNathanielCharge(itemStack, entity))
             {
                 ChargeHandler.addCharge(itemStack, 1);
             }

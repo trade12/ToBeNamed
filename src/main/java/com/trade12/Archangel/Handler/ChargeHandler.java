@@ -15,22 +15,22 @@ import java.util.List;
  */
 public class ChargeHandler {
 
-    public static boolean canWindmakersCharge(ItemStack itemStack, int y)
+    public static boolean canAngelCharge(ItemStack itemStack, int y)
     {
         return !isTagNull(itemStack) && (itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge && y >= 200);
     }
 
-    public static boolean canInfernalCharge(ItemStack itemStack, Entity entity)
+    public static boolean canNathanielCharge(ItemStack itemStack, Entity entity)
     {
         return !isTagNull(itemStack) && (itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge && (entity.isBurning() || entity.dimension == -1));
     }
 
-    public static boolean canAquaticCharge(ItemStack itemStack, Entity entity)
+  /**  public static boolean canAquaticCharge(ItemStack itemStack, Entity entity)
     {
         return !isTagNull(itemStack) && (itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge && (entity.isInWater() || entity.worldObj.isRaining()));
-    }
+    } **/
 
-    public static boolean canFloralCharge(ItemStack itemStack, Entity entity)
+    public static boolean canArielCharge(ItemStack itemStack, Entity entity)
     {
         int x = (int) entity.posX;
         int y = (int) entity.posY;
@@ -40,12 +40,12 @@ public class ChargeHandler {
         return !isTagNull(itemStack) && (itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge && world.canBlockSeeTheSky(x, y, z) && MathHandler.isDaytime(world, x, y, z));
     }
 
-    public static boolean canTransposingCharge(ItemStack itemStack, Entity entity)
+    public static boolean canSarielCharge(ItemStack itemStack, Entity entity)
     {
         return !isTagNull(itemStack) && (itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge && entity.dimension == 1);
     }
 
-    public static boolean canFrostbittenCharge(ItemStack itemStack, Entity entity)
+/**    public static boolean canFrostbittenCharge(ItemStack itemStack, Entity entity)
     {
         int x = (int) entity.posX;
         int y = (int) entity.posY;
@@ -53,7 +53,7 @@ public class ChargeHandler {
         World world = entity.worldObj;
 
         return !isTagNull(itemStack) && itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge && MathHandler.isCold(world, x, y, z);
-    }
+    }**/
 
     public static void addCharge(ItemStack itemStack, int amount)
     {

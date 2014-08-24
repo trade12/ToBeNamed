@@ -66,7 +66,7 @@ public class ItemArielPendant extends Item implements IBauble {
         {
             EntityPlayer player = (EntityPlayer)entity;
 
-            if (ChargeHandler.canFloralCharge(itemStack, entity))
+            if (ChargeHandler.canArielCharge(itemStack, entity))
             {
                 ChargeHandler.addCharge(itemStack, 1);
             }

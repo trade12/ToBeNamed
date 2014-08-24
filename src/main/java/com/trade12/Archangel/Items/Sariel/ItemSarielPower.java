@@ -51,12 +51,9 @@ public class ItemSarielPower extends Item {
     @Override
     public void onUpdate(ItemStack itemStack, World world, Entity entity, int ia, boolean ba)
     {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        if (entity.dimension == 1 && itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge)
+        if (ChargeHandler.canSarielCharge(itemStack, entity))
         {
-            itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") + 1);
+            ChargeHandler.addCharge(itemStack, 1);
         }
     }
 }
