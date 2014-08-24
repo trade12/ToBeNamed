@@ -4,6 +4,7 @@ import com.trade12.Archangel.Archangel;
 import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,6 +40,13 @@ public class ItemEmpoweredFocus extends Item {
         if (this.getDurabilityForDisplay(itemStack) != 1) {
             info.add("Awakened");
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void registerIcons(IIconRegister register)
+    {
+        this.itemIcon = register.registerIcon(Ref.MOD_ID + ":" + Ref.UNLOCALISED_EMPOWERED_FOCUS);
     }
 
     @Override

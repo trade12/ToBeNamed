@@ -22,17 +22,17 @@ public class ItemNathanielStone extends Item {
         super();
         this.setMaxStackSize(1);
         this.setCreativeTab(Archangel.tabCustom);
-        this.setUnlocalizedName(Ref.UNLOCALISED_SARIEL_STONE);
+        this.setUnlocalizedName(Ref.UNLOCALISED_NATHANIEL_STONE);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void registerIcons(IIconRegister register)
     {
-        itemIcon0 = register.registerIcon(Ref.MOD_ID + ":" + Ref.UNLOCALISED_SARIEL_STONE + "0");
-        itemIcon1 = register.registerIcon(Ref.MOD_ID + ":" + Ref.UNLOCALISED_SARIEL_STONE + "1");
-        itemIcon2 = register.registerIcon(Ref.MOD_ID + ":" + Ref.UNLOCALISED_SARIEL_STONE + "2");
-        itemIcon3 = register.registerIcon(Ref.MOD_ID + ":" + Ref.UNLOCALISED_SARIEL_STONE + "3");
+        itemIcon0 = register.registerIcon(Ref.MOD_ID + ":" + Ref.UNLOCALISED_NATHANIEL_STONE + "0");
+        itemIcon1 = register.registerIcon(Ref.MOD_ID + ":" + Ref.UNLOCALISED_NATHANIEL_STONE + "1");
+        itemIcon2 = register.registerIcon(Ref.MOD_ID + ":" + Ref.UNLOCALISED_NATHANIEL_STONE + "2");
+        itemIcon3 = register.registerIcon(Ref.MOD_ID + ":" + Ref.UNLOCALISED_NATHANIEL_STONE + "3");
     }
 
     @SideOnly(Side.CLIENT)
