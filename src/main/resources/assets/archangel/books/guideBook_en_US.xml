@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<book>
+    <page>
+        <text x="92" y="-13" bold="true">Introduction!</text>
+        <text>Archangel uses the Baubles API, written by Azanor, to add a bunch of helpful items and utilities that can all be equipped via the Baubles Inventory.
+            Without further ado, lets jump into the details!</text>
+    </page>
+    <page>
+        <text x="92" y="-13" bold="true">Overview</text>
+        <text>In this book, you will gain information on:
+            •Charge
+            •Angel Crafting Materials
+            •Angel's Baubles
+            •Nathaniel Crafting Materials
+            •Nathaniel Baubles
+            •Ariel Crafting Materials
+            •Ariel Baubles
+            •Sariel Crafting Materials
+            •Sariel Baubles
+        </text>
+    </page>
+    <page>
+        <text x="92" y="-13" bold="true">Charge</text>
+        <text>Charge is the magical energy that all bauble items are powered by. Each type of Bauble will require a different type of charge depending on which angel the item is from, you will find more details about this on the corresponding page.</text>
+    </page>
+    <page>
+            <text x="92" y="-13" bold="true">Angel Crafting Materials</text>
+    <text></text>
+    </page>
+</book>

@@ -37,4 +37,9 @@ public class MathHandler {
         return a != 0;
 
     }
+
+    public static boolean isCold(World world, int x, int y, int z)
+    {
+        return world.canSnowAtBody(x, y, z, false);
+    }
 }

@@ -4,7 +4,9 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import com.trade12.Archangel.Archangel;
 import com.trade12.Archangel.Config.ConfigHandler;
+import com.trade12.Archangel.Handler.ChargeHandler;
 import com.trade12.Archangel.Handler.KeyHandler;
+import com.trade12.Archangel.Handler.PowerHandler;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.relauncher.Side;
@@ -41,57 +43,52 @@ public class ItemAngelPendant extends Item implements IBauble {
         this.itemIcon = register.registerIcon(Ref.MOD_ID + ":" + Ref.UNLOCALISED_ANGEL_PENDANT);
     }
 
-    @Override
-    public BaubleType getBaubleType(ItemStack itemStack) {
-        return BaubleType.AMULET;
-    }
+
 
     @Override
     public void onWornTick(ItemStack itemStack, EntityLivingBase entity) {
-        if (entity instanceof EntityPlayer) {
-            if (itemStack.stackTagCompound == null)
-                itemStack.setTagCompound(new NBTTagCompound());
+        if (entity instanceof EntityPlayer)
+        {
+            EntityPlayer player = (EntityPlayer)entity;
 
-            EntityPlayer player = (EntityPlayer) entity;
-            if (player.posY > 200 && itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge) {
-                itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") + 1);
+            if (ChargeHandler.canWindmakersCharge(itemStack, (int) player.posY))
+            {
+                ChargeHandler.addCharge(itemStack, 1);
             }
 
-            if (itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge) {
-                if (player.inventory.hasItem(ItemLoader.angelPendant)) {
-                    for (int ia = 0; ia <= 35; ia++) {
-                        if (player.inventory.getStackInSlot(ia) != null) {
-                            if (player.inventory.getStackInSlot(ia).getUnlocalizedName().equals("item.AngelBattery")) {
-                                if (player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("Charge") > 0) {
-                                    player.inventory.getStackInSlot(ia).stackTagCompound.setInteger("Charge", player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("Charge") - 1);
-                                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") + 1);
-
-                                }
-                            }
-                        }
-                    }
-                }
+            if (ChargeHandler.hasRoomForCharge(itemStack))
+            {
+                PowerHandler.drainFromBatteryIfPossible(itemStack, player, ItemLoader.angelPower);
             }
 
-            if (itemStack.stackTagCompound.getInteger("Charge") > 0) {
+            if (ChargeHandler.hasEnoughChargeForOperation(itemStack, 1))
+            {
                 player.fallDistance = 0;
-                if (KeyHandler.pendant) {
+
+                if (player.isAirBorne)
+                {
+                    counter++;
+                }
+
+                if (KeyHandler.pendant && ChargeHandler.hasEnoughChargeForOperation(itemStack, 1))
+                {
                     active = true;
-                    if (player.isSneaking()) {
+                    if (player.isSneaking())
+                    {
                         player.addVelocity(0, 0.2, 0);
-                        player.worldObj.spawnParticle("happyVillager", player.posX, player.posY - 2, player.posZ, player.posX, player.posY, player.posZ);
+                        player.worldObj.spawnParticle("happyVillager", player.posX, player.posY-2, player.posZ, player.posX, player.posY, player.posZ);
                         counter++;
                     }
                 }
-                if (!KeyHandler.pendant) {
+
+                if (!KeyHandler.pendant)
+                {
                     active = false;
                 }
-                if (player.isAirBorne) {
-                    counter++;
-                }
-                if (counter == 100) //5 seconds
+
+                if (counter == 100)
                 {
-                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") - 10);
+                    ChargeHandler.removeCharge(itemStack, 1);
                     counter = 0;
                 }
             }
@@ -99,7 +96,15 @@ public class ItemAngelPendant extends Item implements IBauble {
     }
 
     @Override
+    public BaubleType getBaubleType(ItemStack itemStack)
+    {
+        return BaubleType.AMULET;
+    }
+
+
+    @Override
     public boolean showDurabilityBar(ItemStack itemStack)
+
     {
         return  false;
     }
@@ -117,26 +122,13 @@ public class ItemAngelPendant extends Item implements IBauble {
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean useInfo)
     {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        info.add("Current Charge: " + itemStack.stackTagCompound.getInteger("Charge"));
-        if (active)
-        {
-            info.add(EnumChatFormatting.DARK_PURPLE + "Secondary Ability Awakened");
-        }
-        if (!active)
-        {
-            info.add(EnumChatFormatting.WHITE + "Secondary Ability Suppressed");
-        }
+       ChargeHandler.addTooltipChargeInformation(itemStack, info);
+        ChargeHandler.addSecondaryAbilityInformation(active, info);
     }
 
     public void onCreated(ItemStack itemStack, World world, EntityPlayer player)
     {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        itemStack.stackTagCompound.setInteger("Charge", 0);
+        ChargeHandler.setCharge(itemStack, 0);
     }
 
     @Override

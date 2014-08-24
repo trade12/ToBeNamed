@@ -4,6 +4,8 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import com.trade12.Archangel.Archangel;
 import com.trade12.Archangel.Config.ConfigHandler;
+import com.trade12.Archangel.Handler.ChargeHandler;
+import com.trade12.Archangel.Handler.PowerHandler;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.relauncher.Side;
@@ -15,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import scala.tools.nsc.interpreter.Power;
 
 import java.util.List;
 
@@ -39,20 +42,14 @@ public class ItemAngelRing extends Item implements IBauble {
 
     public void onCreated(ItemStack itemStack, World world, EntityPlayer player)
     {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        itemStack.stackTagCompound.setInteger("Charge", 0);
+        ChargeHandler.setCharge(itemStack, 0);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean useInfo)
     {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        info.add("Current Charge: " + itemStack.stackTagCompound.getInteger("Charge"));
+        ChargeHandler.addTooltipChargeInformation(itemStack, info);
     }
 
     @Override
@@ -60,54 +57,38 @@ public class ItemAngelRing extends Item implements IBauble {
     {
         if (entity instanceof EntityPlayer)
         {
-            if (itemStack.stackTagCompound == null)
-                itemStack.setTagCompound(new NBTTagCompound());
-
             EntityPlayer player = (EntityPlayer)entity;
-            if (player.posY > 200 && itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge)  //todo: add Config Handler
+
+            if (ChargeHandler.canWindmakersCharge(itemStack, (int) player.posY))
             {
-                itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") + 1);
+                ChargeHandler.addCharge(itemStack, 1);
             }
 
-            if (itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge)
+            if (ChargeHandler.hasRoomForCharge(itemStack))
             {
-                if (player.inventory.hasItem(ItemLoader.angelPower))
-                {
-                    for (int ia = 0; ia <= 35; ia++)
-                    {
-                        if (player.inventory.getStackInSlot(ia) != null)
-                        {
-                            if(player.inventory.getStackInSlot(ia).getUnlocalizedName().equals("item.angelPower"))
-                            {
-                                if (player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("Charge") > 0)
-                                {
-                                    player.inventory.getStackInSlot(ia).stackTagCompound.setInteger("Charge", player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("Charge")-1);
-                                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge")+1);
-                                }
-                            }
-                        }
-                    }
-                }
+                PowerHandler.drainFromBatteryIfPossible(itemStack, player, ItemLoader.angelPower);
             }
 
-            if (itemStack.stackTagCompound.getInteger("Charge") > 0)
+            if (ChargeHandler.hasEnoughChargeForOperation(itemStack, 10))
             {
                 player.capabilities.allowFlying = true;
                 player.fallDistance = 0;
+
                 if (player.isAirBorne)
                 {
                     counter++;
                 }
-                if (counter == 100) //Thing this is 5 second xD
+
+                if (counter == 100)
                 {
-                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge")- 10);
+                    ChargeHandler.removeCharge(itemStack, 10);
                     counter = 0;
+                    if (!ChargeHandler.hasEnoughChargeForOperation(itemStack, 10) && !player.capabilities.isCreativeMode)
+                    {
+                        player.capabilities.allowFlying = false;
+                        player.capabilities.isFlying = false;
+                    }
                 }
-            }
-            else if (!player.capabilities.isCreativeMode)
-            {
-                player.capabilities.allowFlying = false;
-                player.capabilities.isFlying = false;
             }
         }
     }

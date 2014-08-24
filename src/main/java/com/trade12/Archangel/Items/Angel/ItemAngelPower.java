@@ -2,6 +2,7 @@ package com.trade12.Archangel.Items.Angel;
 
 import com.trade12.Archangel.Archangel;
 import com.trade12.Archangel.Config.ConfigHandler;
+import com.trade12.Archangel.Handler.ChargeHandler;
 import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -13,6 +14,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import org.omg.CORBA.CharHolder;
 
 import java.util.List;
 
@@ -38,21 +40,15 @@ public class ItemAngelPower extends Item {
 
     public void onCreated(ItemStack itemStack, World world, EntityPlayer player)
     {
-        if(itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        itemStack.stackTagCompound.setInteger("Charge", 0);
+        ChargeHandler.setCharge(itemStack, 0);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean useInfo)
     {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        info.add("Current Charge: " + itemStack.stackTagCompound.getInteger("Charge"));
-        info.add("Portable Energy Source for your mystical  items!");
+        ChargeHandler.addTooltipChargeInformation(itemStack, info);
+        info.add(Ref.UNLOCALISED_POWER_DESC);
     }
 
     @Override

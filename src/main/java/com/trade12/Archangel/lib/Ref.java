@@ -7,7 +7,7 @@ public class Ref {
     public static final String MOD_ID = "Archangel";
     public static final String MOD_NAME = "Archangel";
     public static final String VERSION_NUMBER = "1.7.10-1.0";
-    public static final String DEPENDENCIES = "required-after:Baubles";
+    public static final String DEPENDENCIES = "required-after:Baubles; required-after:Enchiridion";
     public static final String SERVER_PROXY_CLASS = "com.trade12.Archangel.Proxy.ServerProxy";
     public static final String CLIENT_PROXY_CLASS = "com.trade12.Archangel.Proxy.ClientProxy";
     public static final String MOD_GUI_FACTORY = "com.trade.Archangel.Gui.ModGuiFactory";
@@ -34,11 +34,14 @@ public class Ref {
     public static final String UNLOCALISED_ARIEL_BELT = "arielBelt";
     public static final String UNLOCALISED_ARIEL_PENDANT = "arielPendant";
 
+    public static final String UNLOCALISED_BOOK = "guideBook";
+
     //public static final String UNLOCALISED_AUTOFEEDER_RING = "autoFeeder_Ring";
 
     //Ability
     public static final String UNLOCALISED_SECONDARY_ACTIVE = "Secondary Ability Awakened";
     public static final String UNLOCALISED_SECONDARY_DEACTIVE = "Secondary Ability Suppressed";
+    public static final String UNLOCALISED_POWER_DESC = "Portable Battery for your items!";
 
 
     //Items

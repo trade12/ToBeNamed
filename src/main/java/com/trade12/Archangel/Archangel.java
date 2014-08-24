@@ -5,6 +5,7 @@ import com.trade12.Archangel.Handler.KeyHandler;
 import com.trade12.Archangel.Handler.RecipeHandler;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.Proxy.CommonProxy;
+import com.trade12.Archangel.addon.enchiridion.EnchiridionHandler;
 import com.trade12.Archangel.entity.EntityDeathAngel;
 import com.trade12.Archangel.entity.EntityHandler;
 import com.trade12.Archangel.entity.EntityOstrich;
@@ -14,6 +15,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import enchiridion.Enchiridion;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -48,6 +50,7 @@ public class Archangel {
         EntityHandler.registerEntityWithDeathAngelSpawns(EntityDeathAngel.class, "entityDeathAngel", 0x996600, 0x663300, 1, 2, 100);
         proxy.initRenders();
         RecipeHandler.initRecipes();
+        EnchiridionHandler.load();
 
 
     }
