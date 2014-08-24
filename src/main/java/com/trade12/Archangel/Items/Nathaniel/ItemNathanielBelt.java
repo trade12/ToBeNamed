@@ -3,7 +3,9 @@ package com.trade12.Archangel.Items.Nathaniel;
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import com.trade12.Archangel.Archangel;
+import com.trade12.Archangel.Handler.ChargeHandler;
 import com.trade12.Archangel.Handler.KeyHandler;
+import com.trade12.Archangel.Handler.PowerHandler;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.relauncher.Side;
@@ -17,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import scala.Char;
 import sun.org.mozilla.javascript.internal.ast.Block;
 
 import java.util.List;
@@ -44,96 +47,70 @@ public class ItemNathanielBelt extends Item implements IBauble {
 
     public void onCreated(ItemStack itemStack, World world, EntityPlayer player)
     {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        itemStack.stackTagCompound.setInteger("Charge", 0);
+        ChargeHandler.setCharge(itemStack, 0);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean useInfo)
     {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        info.add("Current Charge: " + itemStack.stackTagCompound.getInteger("Charge"));
-        if (active)
-        {
-            info.add(EnumChatFormatting.DARK_PURPLE + Ref.UNLOCALISED_SECONDARY_ACTIVE);
-        }
-        if (!active)
-        {
-            info.add(EnumChatFormatting.WHITE + Ref.UNLOCALISED_SECONDARY_DEACTIVE);
-        }
+       ChargeHandler.addTooltipChargeInformation(itemStack, info);
+        ChargeHandler.addSecondaryAbilityInformation(active, info);
     }
 
     @Override
     public void onWornTick(ItemStack itemStack, EntityLivingBase entity)
     {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        if (entity.isBurning() && itemStack.stackTagCompound.getInteger("Charge") < 500 || entity.dimension == -1 && itemStack.stackTagCompound.getInteger("Charge") < 500)
-        {
-            itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") + 1);
-        }
-
         if (entity instanceof EntityPlayer)
         {
             EntityPlayer player = (EntityPlayer)entity;
 
-            if (itemStack.stackTagCompound.getInteger("Charge") < 500)
+            if (ChargeHandler.canInfernalCharge(itemStack, entity))
             {
-                if (player.inventory.hasItem(ItemLoader.nathanielPower))
-                {
-                    for (int ia = 0; ia <= 35; ia++)
-                    {
-                        if (player.inventory.getStackInSlot(ia) != null)
-                        {
-                            if (player.inventory.getStackInSlot(ia).getUnlocalizedName().equals("item.nathanielPower"))
-                            {
-                                if (player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("Charge") > 0)
-                                {
-                                    player.inventory.getStackInSlot(ia).stackTagCompound.setInteger("Charge",player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("Charge")-1);
-                                    itemStack.stackTagCompound.setInteger("Charge",itemStack.stackTagCompound.getInteger("Charge")+1);
-                                }
-                            }
-                        }
-                    }
-                }
+                ChargeHandler.addCharge(itemStack, 1);
             }
 
-            if (itemStack.stackTagCompound.getInteger("Charge") > 0)
+            if (ChargeHandler.hasRoomForCharge(itemStack))
+            {
+                PowerHandler.drainFromBatteryIfPossible(itemStack, player, ItemLoader.nathanielPower);
+            }
+
+            if (ChargeHandler.hasEnoughChargeForOperation(itemStack, 10))
             {
                 World world = player.worldObj;
                 int x = (int) (player.posX);
-                int floor = (int) (player.posY -2);
+                int floor = (int) (player.posY - 2);
                 int z = (int) (player.posZ);
-                if ((world.getBlock(x, floor, z) == Blocks.lava) || (world.getBlock(x, floor, z ) == Blocks.flowing_lava))
+
+                if ((world.getBlock(x, floor, z) == Blocks.lava) || (world.getBlock(x, floor, z) == Blocks.flowing_lava))
                 {
-                    player.addVelocity(0,0.2,0);
+                    player.addVelocity(0, 0.2, 0);
                     player.fallDistance = 0;
                     counter++;
                 }
 
+                if (counter == 100)
+                {
+                    ChargeHandler.removeCharge(itemStack, 10);
+                    counter = 0;
+                }
+            }
+
+            if (ChargeHandler.hasEnoughChargeForOperation(itemStack, 5))
+            {
                 if (KeyHandler.belt)
                 {
                     active = true;
-                    if (player.worldObj.getBlock((int) player.posX -1, (int) player.posY, (int) player.posZ - 1) == Blocks.air)
+                    if (player.worldObj.getBlock((int) player.posX - 1, (int) player.posY, (int) player.posZ - 1) == Blocks.air)
                     {
-                        player.worldObj.setBlock((int) player.posX -1, (int) player.posY, (int) player.posZ -1, Blocks.fire);
+                        player.worldObj.setBlock((int) player.posX - 1, (int) player.posY, (int) player.posZ - 1, Blocks.fire);
+                        ChargeHandler.removeCharge(itemStack, 5);
                     }
                 }
+
                 if (!KeyHandler.belt)
                 {
                     active = false;
-                }
-
-                if (counter == 100)
-                {
-                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") -10);
-                    counter = 0;
                 }
             }
         }

@@ -4,7 +4,9 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import com.trade12.Archangel.Archangel;
 import com.trade12.Archangel.Config.ConfigHandler;
+import com.trade12.Archangel.Handler.ChargeHandler;
 import com.trade12.Archangel.Handler.KeyHandler;
+import com.trade12.Archangel.Handler.PowerHandler;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.relauncher.Side;
@@ -20,6 +22,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import scala.Char;
 
 import java.util.List;
 
@@ -53,60 +56,61 @@ public class ItemNathanielPendant extends Item implements IBauble {
 
     @Override
     public void onWornTick(ItemStack itemStack, EntityLivingBase entity) {
-        if (entity instanceof EntityPlayer) {
-            if (itemStack.stackTagCompound == null)
-                itemStack.setTagCompound(new NBTTagCompound());
+        if (entity instanceof EntityPlayer)
+        {
+            EntityPlayer player = (EntityPlayer)entity;
 
-            EntityPlayer player = (EntityPlayer) entity;
-            if (itemStack.stackTagCompound.getInteger("Charge ") > 0) {
-                int x = (int) Math.round(player.posX - 0.5F);
-                int y = (int) player.posY;
-                int z = (int) Math.round(player.posZ - 0.5F);
-                player.addPotionEffect(new PotionEffect(Potion.fireResistance.getId(), 10, 1));
-                if (KeyHandler.pendant) {
-                    if (player.worldObj.getBlockLightValue(x, y, z) < 6) {
-                        if (player.worldObj.getBlock(x, y - 1, z) == Blocks.air) {
-                            player.worldObj.setBlock(x , y-1 , z , Blocks.quartz_ore); //todo add the feature of secrets
-                            itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge"));
+            if (ChargeHandler.canInfernalCharge(itemStack, entity))
+            {
+                ChargeHandler.addCharge(itemStack, 1);
+            }
 
-                        }
-                    }
-                    active = true;
-                }
-                if (!KeyHandler.pendant) {
-                    active = false;
-                }
-                if (counter == 100) {
-                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") - 1);
-                    counter = 0;
-                } else {
+            if (ChargeHandler.hasRoomForCharge(itemStack))
+            {
+                PowerHandler.drainFromBatteryIfPossible(itemStack, player, ItemLoader.nathanielPower);
+            }
+
+            if (ChargeHandler.hasEnoughChargeForOperation(itemStack, 10))
+            {
+                World world = player.worldObj;
+                int x = (int) (player.posX);
+                int floor = (int) (player.posY - 2);
+                int z = (int) (player.posZ);
+
+                if ((world.getBlock(x, floor, z) == Blocks.lava) || (world.getBlock(x, floor, z) == Blocks.flowing_lava))
+                {
+                    player.addVelocity(0, 0.2, 0);
+                    player.fallDistance = 0;
                     counter++;
+                }
+
+                if (counter == 100)
+                {
+                    ChargeHandler.removeCharge(itemStack, 10);
+                    counter = 0;
                 }
             }
 
-        }
-        if (entity.isBurning() && itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge || entity.dimension == -1 && itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge) {
-            itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge") + 1);
-        }
-        if (entity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) entity;
-
-            if (itemStack.stackTagCompound.getInteger("Charge") < ConfigHandler.maxCharge) {
-                if (player.inventory.hasItem(ItemLoader.nathanielPower)) {
-                    for (int ia = 0; ia <= 35; ia++) {
-                        if (player.inventory.getStackInSlot(ia) != null) {
-                            if (player.inventory.getStackInSlot(ia).getUnlocalizedName().equals("item.nathanielPower")) {
-                                if (player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("charge") > 0) {
-                                    player.inventory.getStackInSlot(ia).stackTagCompound.setInteger("charge", player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("charge") - 1);
-                                    itemStack.stackTagCompound.setInteger("charge", itemStack.stackTagCompound.getInteger("charge") + 1);
-                                }
-                            }
-                        }
+            if (ChargeHandler.hasEnoughChargeForOperation(itemStack, 5))
+            {
+                if (KeyHandler.belt)
+                {
+                    active = true;
+                    if (player.worldObj.getBlock((int) player.posX - 1, (int) player.posY, (int) player.posZ - 1) == Blocks.air)
+                    {
+                        player.worldObj.setBlock((int) player.posX - 1, (int) player.posY, (int) player.posZ - 1, Blocks.fire);
+                        ChargeHandler.removeCharge(itemStack, 5);
                     }
+                }
+
+                if (!KeyHandler.belt)
+                {
+                    active = false;
                 }
             }
         }
     }
+
 
     @Override
     public boolean showDurabilityBar(ItemStack itemStack)
@@ -127,18 +131,8 @@ public class ItemNathanielPendant extends Item implements IBauble {
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean useInfo)
     {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        info.add("Current Charge: " + itemStack.stackTagCompound.getInteger("charge"));
-        if (active)
-        {
-            info.add(EnumChatFormatting.DARK_PURPLE + "Secondary Ability Awakened");
-        }
-        if (!active)
-        {
-            info.add(EnumChatFormatting.WHITE + "Secondary Ability Suppressed");
-        }
+        ChargeHandler.addTooltipChargeInformation(itemStack, info);
+        ChargeHandler.addSecondaryAbilityInformation(active, info);
     }
 
     @Override
@@ -164,9 +158,6 @@ public class ItemNathanielPendant extends Item implements IBauble {
 
     public void onCreated(ItemStack itemStack, World world, EntityPlayer player)
     {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        itemStack.stackTagCompound.setInteger("charge", 0);
+        ChargeHandler.setCharge(itemStack, 0);
     }
 }
