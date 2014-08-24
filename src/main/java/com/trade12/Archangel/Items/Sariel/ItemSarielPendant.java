@@ -4,7 +4,9 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import com.trade12.Archangel.Archangel;
 import com.trade12.Archangel.Config.ConfigHandler;
+import com.trade12.Archangel.Handler.ChargeHandler;
 import com.trade12.Archangel.Handler.KeyHandler;
+import com.trade12.Archangel.Handler.PowerHandler;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.relauncher.Side;
@@ -47,19 +49,13 @@ public class ItemSarielPendant extends Item implements IBauble {
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean useInfo)
     {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        info.add("Current Charge: " + itemStack.stackTagCompound.getInteger("charge"));
-        info.add(EnumChatFormatting.DARK_PURPLE + "Secondary Ability is available");
+        ChargeHandler.addTooltipChargeInformation(itemStack, info);
+        info.add(EnumChatFormatting.LIGHT_PURPLE + "Secondary Ability is available");
     }
 
     public void onCreated(ItemStack itemStack, World world, EntityPlayer player)
     {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        itemStack.stackTagCompound.setInteger("charge", 0);
+        ChargeHandler.setCharge(itemStack, 0);
     }
 
     @Override
@@ -73,56 +69,39 @@ public class ItemSarielPendant extends Item implements IBauble {
     {
         if (entity instanceof EntityPlayer)
         {
-            if (itemStack.stackTagCompound == null)
-                itemStack.setTagCompound(new NBTTagCompound());
-
             EntityPlayer player = (EntityPlayer)entity;
-            if (player.dimension == 1 && itemStack.stackTagCompound.getInteger("charge") < ConfigHandler.maxCharge)
+
+            if (ChargeHandler.canTransposingCharge(itemStack, entity))
             {
-                itemStack.stackTagCompound.setInteger("charge", itemStack.stackTagCompound.getInteger("charge") + 1);
+                ChargeHandler.addCharge(itemStack, 1);
             }
 
-            if (itemStack.stackTagCompound.getInteger("charge") < ConfigHandler.maxCharge)
+            if (ChargeHandler.hasRoomForCharge(itemStack))
             {
-                if (player.inventory.hasItem(ItemLoader.sarielPower))
-                {
-                    for (int ia = 0; ia <= 35; ia++)
-                    {
-                        if (player.inventory.getStackInSlot(ia) != null)
-                        {
-                            if(player.inventory.getStackInSlot(ia).getUnlocalizedName().equals("item.SarielPower"))
-                            {
-                                if (player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("charge") > 0)
-                                {
-                                    player.inventory.getStackInSlot(ia).stackTagCompound.setInteger("charge", player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("charge")-1);
-                                    itemStack.stackTagCompound.setInteger("charge", itemStack.stackTagCompound.getInteger("charge")+1);
-                                }
-                            }
-                        }
-                    }
-                }
+                PowerHandler.drainFromBatteryIfPossible(itemStack, player, ItemLoader.sarielPower);
             }
 
-            if (itemStack.stackTagCompound.getInteger("charge") > 0)
+            if (ChargeHandler.hasEnoughChargeForOperation(itemStack, 10))
             {
                 if (player.worldObj.getWorldTime() > 13000)
                 {
                     player.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), 500, 1));
                     counter++;
                 }
-                if (KeyHandler.pendant)
-                {
-                    if (!player.worldObj.isRemote)
-                    {
-                        player.getInventoryEnderChest().openInventory();
-                        player.displayGUIChest(player.getInventoryEnderChest());
-                        KeyHandler.pendant = false;
-                        itemStack.stackTagCompound.setInteger("charge", itemStack.stackTagCompound.getInteger("charge") - 50);
-                    }
-                }
                 if (counter == 100)
                 {
-                    itemStack.stackTagCompound.setInteger("charge", itemStack.stackTagCompound.getInteger("charge") - 10);
+                    ChargeHandler.removeCharge(itemStack, 10);
+                }
+            }
+
+            if (KeyHandler.pendant && ChargeHandler.hasEnoughChargeForOperation(itemStack, 50))
+            {
+                if (!player.worldObj.isRemote)
+                {
+                    player.getInventoryEnderChest().openInventory();
+                    player.displayGUIChest(player.getInventoryEnderChest());
+                    KeyHandler.pendant = false;
+                    ChargeHandler.removeCharge(itemStack, 50);
                 }
             }
         }

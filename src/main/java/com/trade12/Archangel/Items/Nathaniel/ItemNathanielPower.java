@@ -47,7 +47,7 @@ public class ItemNathanielPower extends Item {
     public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean useInfo)
     {
         ChargeHandler.addTooltipChargeInformation(itemStack, info);
-        info.add("Portable Energy Source for your mystical  items!");
+        info.add(Ref.UNLOCALISED_POWER_DESC);
     }
 
     @Override

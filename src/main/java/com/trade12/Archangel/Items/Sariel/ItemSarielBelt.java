@@ -4,7 +4,9 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import com.trade12.Archangel.Archangel;
 import com.trade12.Archangel.Config.ConfigHandler;
+import com.trade12.Archangel.Handler.ChargeHandler;
 import com.trade12.Archangel.Handler.KeyHandler;
+import com.trade12.Archangel.Handler.PowerHandler;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.relauncher.Side;
@@ -46,28 +48,15 @@ public class ItemSarielBelt extends Item implements IBauble {
 
     public void onCreated(ItemStack itemStack, World world, EntityPlayer player)
     {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        itemStack.stackTagCompound.setInteger("charge", 0);
+        ChargeHandler.setCharge(itemStack, 0);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean useInfo)
     {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        info.add("Current Charge: " + itemStack.stackTagCompound.getInteger("charge"));
-        if (active)
-        {
-            info.add(EnumChatFormatting.DARK_PURPLE + "Secondary Ability Awakened");
-        }
-        if (!active)
-        {
-            info.add(EnumChatFormatting.WHITE + "Secondary Ability Suppressed");
-        }
+        ChargeHandler.addTooltipChargeInformation(itemStack, info);
+        ChargeHandler.addSecondaryAbilityInformation(active, info);
     }
 
     @Override
@@ -77,86 +66,45 @@ public class ItemSarielBelt extends Item implements IBauble {
     }
 
     @Override
-    public void onWornTick(ItemStack itemStack, EntityLivingBase entity)
-    {
-        if (entity instanceof EntityPlayer)
-        {
-            if (itemStack.stackTagCompound == null)
-                itemStack.setTagCompound(new NBTTagCompound());
+    public void onWornTick(ItemStack itemStack, EntityLivingBase entity) {
+        if (entity instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) entity;
 
-            EntityPlayer player = (EntityPlayer)entity;
-            if (player.dimension == 1 && itemStack.stackTagCompound.getInteger("charge") < ConfigHandler.maxCharge)
-            {
-                itemStack.stackTagCompound.setInteger("charge", itemStack.stackTagCompound.getInteger("charge") + 1);
+            if (ChargeHandler.canTransposingCharge(itemStack, entity)) {
+                ChargeHandler.addCharge(itemStack, 1);
             }
 
-            if (itemStack.stackTagCompound.getInteger("charge") < ConfigHandler.maxCharge)
-            {
-                if (player.inventory.hasItem(ItemLoader.sarielPower))
-                {
-                    for (int ia = 0; ia <= 35; ia++)
-                    {
-                        if (player.inventory.getStackInSlot(ia) != null)
-                        {
-                            if(player.inventory.getStackInSlot(ia).getUnlocalizedName().equals("item.SarielPower"))
-                            {
-                                if (player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("charge") > 0)
-                                {
-                                    player.inventory.getStackInSlot(ia).stackTagCompound.setInteger("charge", player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("charge")-1);
-                                    itemStack.stackTagCompound.setInteger("charge", itemStack.stackTagCompound.getInteger("charge")+1);
-                                }
-                            }
-                        }
-                    }
-                }
+            if (ChargeHandler.hasRoomForCharge(itemStack)) {
+                PowerHandler.drainFromBatteryIfPossible(itemStack, player, ItemLoader.sarielPower);
             }
 
-            if (itemStack.stackTagCompound.getInteger("charge") > 0)
-            {
-                if (player.isInWater())
-                {
-                    if (player instanceof EntityPlayerMP)
-                    {
-                        EntityPlayerMP playerMP = (EntityPlayerMP)player;
+            if (ChargeHandler.hasEnoughChargeForOperation(itemStack, 10)) {
+                if (player.isInWater()) {
+                    if (player instanceof EntityPlayerMP) {
+                        EntityPlayerMP playerMP = (EntityPlayerMP) player;
                         float rand = itemRand.nextFloat();
-                        if (playerMP.playerNetServerHandler.func_147362_b().isChannelOpen())
-                        {
-                            EnderTeleportEvent event = new EnderTeleportEvent(playerMP, playerMP.posX+rand, playerMP.posY+3, playerMP.posZ+rand, 5.0F);
-                            if (!MinecraftForge.EVENT_BUS.post(event))
-                            {
-                                if (playerMP.isRiding())
-                                {
-                                    playerMP.mountEntity((Entity) null);
-                                }
-                            }
+                        if (playerMP.playerNetServerHandler.func_147362_b().isChannelOpen()) {
+                            EnderTeleportEvent event = new EnderTeleportEvent(playerMP, playerMP.posX + rand, playerMP.posY + 3, playerMP.posZ + rand, 5.0F);
                             playerMP.setPositionAndUpdate(event.targetX, event.targetY, event.targetZ);
                             playerMP.fallDistance = 0.0F;
-                            itemStack.stackTagCompound.setInteger("charge", itemStack.stackTagCompound.getInteger("charge") - 10);
+                            ChargeHandler.removeCharge(itemStack, 10);
                         }
                     }
                 }
-                if (KeyHandler.belt)
-                {
-                    if (itemStack.stackTagCompound.getInteger("charge") > 1)
-                    {
-                        player.addExperience(1);
-                        itemStack.stackTagCompound.setInteger("charge", itemStack.stackTagCompound.getInteger("charge") - 2);
-                    }
+
+                if (KeyHandler.belt && ChargeHandler.hasEnoughChargeForOperation(itemStack, 2)) {
+                    player.addExperience(1);
+                    ChargeHandler.removeCharge(itemStack, 2);
                     active = true;
                 }
-                if (!KeyHandler.belt)
-                {
+
+                if (!KeyHandler.belt) {
                     active = false;
                 }
             }
         }
     }
 
-    @Override
-    public boolean showDurabilityBar(ItemStack stack)
-    {
-        return false;
-    }
 
     @Override
     public void onEquipped(ItemStack itemStack, EntityLivingBase entity)

@@ -4,6 +4,9 @@ import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import com.trade12.Archangel.Archangel;
 import com.trade12.Archangel.Config.ConfigHandler;
+import com.trade12.Archangel.Handler.ChargeHandler;
+import com.trade12.Archangel.Handler.InventoryHandler;
+import com.trade12.Archangel.Handler.PowerHandler;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.lib.Ref;
 
@@ -47,64 +50,32 @@ public class ItemSarielRing extends Item implements IBauble {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean useInfo) {
-        if (itemStack.stackTagCompound == null)
-            itemStack.setTagCompound(new NBTTagCompound());
-
-        info.add("Current Charge: " + itemStack.stackTagCompound.getInteger("Charge"));
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean useInfo)
+    {
+        ChargeHandler.addTooltipChargeInformation(itemStack, info);
     }
 
     @Override
     public void onWornTick(ItemStack itemStack, EntityLivingBase entity) {
-        if (entity instanceof EntityPlayer) {
-            if (itemStack.stackTagCompound == null)
-                itemStack.setTagCompound(new NBTTagCompound());
+        if (entity instanceof EntityPlayer)
+        {
+            EntityPlayer player = (EntityPlayer)entity;
 
-            EntityPlayer player = (EntityPlayer) entity;
-            if (player.dimension == 1 && itemStack.stackTagCompound.getInteger("charge") < ConfigHandler.maxCharge) {
-                itemStack.stackTagCompound.setInteger("charge", itemStack.stackTagCompound.getInteger("charge") + 1);
-            }
-
-            if (itemStack.stackTagCompound.getInteger("charge") < ConfigHandler.maxCharge) {
-                if (player.inventory.hasItem(ItemLoader.sarielPower)) {
-                    for (int ia = 0; ia <= 35; ia++) {
-                        if (player.inventory.getStackInSlot(ia) != null) {
-                            if (player.inventory.getStackInSlot(ia).getUnlocalizedName().equals("item.SarielPower")) {
-                                if (player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("charge") > 0) {
-                                    player.inventory.getStackInSlot(ia).stackTagCompound.setInteger("charge", player.inventory.getStackInSlot(ia).stackTagCompound.getInteger("charge") - 1);
-                                    itemStack.stackTagCompound.setInteger("charge", itemStack.stackTagCompound.getInteger("charge") + 1);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (itemStack.stackTagCompound.getInteger("Charge") > 0)
+            if (ChargeHandler.canTransposingCharge(itemStack, entity))
             {
-                if (itemStack.stackTagCompound.getInteger("Charge") > 10)
-                {
-                    if (player.inventory.hasItem(new ItemStack(Blocks.sandstone).getItem())) //todo; change blocks.sandstone to alternative block
-                    {
-                        for (int ia = 0; ia <= 35; ia++)
-                        {
-                            if (player.inventory.getStackInSlot(ia) != null)
-                            {
-                                if (player.inventory.getStackInSlot(ia).getItem() == new ItemStack(Blocks.sandstone).getItem() && player.inventory.getStackInSlot(ia).stackSize == 1)
-                                {
-                                    player.inventory.setInventorySlotContents(ia, new ItemStack(Blocks.end_stone));
-                                    itemStack.stackTagCompound.setInteger("Charge", itemStack.stackTagCompound.getInteger("Charge")- 10);
-                                }
-                            }
-                        }
-                    }
-
-                }
+                ChargeHandler.addCharge(itemStack, 1);
             }
 
+            if (ChargeHandler.hasRoomForCharge(itemStack))
+            {
+                PowerHandler.drainFromBatteryIfPossible(itemStack, player, ItemLoader.sarielPower);
+            }
 
+            if (ChargeHandler.hasEnoughChargeForOperation(itemStack, 50))
+            {
+                InventoryHandler.convertBlockToBlockInPlayerInventory(player, itemStack, 50, Blocks.sandstone, Blocks.end_stone);
+            }
         }
-
     }
 
     @Override
