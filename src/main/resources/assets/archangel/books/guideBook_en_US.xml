@@ -1,5 +1,16 @@
 <?xml version="1.0"?>
 <book>
+
+    <info gen="true">
+        <name>Archangel Guide Book</name>
+        <author>trade12</author>
+        <color>FF8000</color>
+        <item>angelPendant</item>
+    </info>
+
+    <register type="item" unlocalized="ItemAngelPendant" name="angelPendant"></register>
+
+
     <page>
         <text x="92" y="-13" bold="true">Introduction!</text>
         <text>Archangel uses the Baubles API, written by Azanor, to add a bunch of helpful items and utilities that can all be equipped via the Baubles Inventory.
@@ -24,7 +35,13 @@
         <text>Charge is the magical energy that all bauble items are powered by. Each type of Bauble will require a different type of charge depending on which angel the item is from, you will find more details about this on the corresponding page.</text>
     </page>
     <page>
-            <text x="92" y="-13" bold="true">Angel Crafting Materials</text>
-    <text></text>
+            <text x="92" y="-13" bold="true">Angel Pendant</text>
+    <text>The angel ring is from the first known Archangel and grants the person who uses it the ability to ascend and descend from the heavens themselves. The only problem is, the ring was designed for angels only meaning the only way for it to charge with mystical power is to be at a great height (around Y=200).</text>
+        <crafting x="100" y="119" size="1.00">
+        <craft1>ostrichFeather|ostrichFeather|</craft1>
+        <craft2>angelPillow|basicPendant|angelPillow|</craft2>
+        <craft3>||angelPillow|emerald</craft3>
+        <craftResult num="1">angelPendant</craftResult>
+        </crafting>
     </page>
 </book>
