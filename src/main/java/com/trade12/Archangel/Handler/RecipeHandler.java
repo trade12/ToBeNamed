@@ -32,9 +32,9 @@ public class RecipeHandler {
         //Nathaniel
         GameRegistry.addRecipe(new ItemStack(ItemLoader.nathanielStone, 1, 1000), "XXX", "XYX", "XXX", 'X', Items.lava_bucket, 'Y', Blocks.stone);
         GameRegistry.addRecipe(new ItemStack(ItemLoader.damagedHalo), "XYX", 'X', Items.lava_bucket, 'Y', Items.quartz); //todo add halo
-     //   GameRegistry.addRecipe(new ItemStack(ItemLoader.nathanielRing), " X ", "YWY", "ZZZ", 'X', nathanielStoneFull, 'Y', ItemLoader.demonHeart, 'Z', ItemLoader.damagedHalo, 'W', ItemLoader.basicRing);
-//        GameRegistry.addRecipe(new ItemStack(ItemLoader.nathanielBelt), "ZZ ", "YWY", " YX", 'X', nathanielStoneFull, 'Y', ItemLoader.demonHeart, 'Z', ItemLoader.damagedHalo, 'W', ItemLoader.basicPendant);
-   //     GameRegistry.addRecipe(new ItemStack(ItemLoader.nathanielPower), "X", "Y", 'X', ItemLoader.demonHeart, 'Y', ItemLoader.dormantCrystal); //todo need to add demon animal
+        GameRegistry.addRecipe(new ItemStack(ItemLoader.nathanielRing), " X ", "YWY", "ZZZ", 'X', nathanielStoneFull, 'Y', ItemLoader.heart, 'Z', ItemLoader.damagedHalo, 'W', ItemLoader.basicRing);
+        GameRegistry.addRecipe(new ItemStack(ItemLoader.nathanielBelt), "ZZ ", "YWY", " YX", 'X', nathanielStoneFull, 'Y', ItemLoader.heart, 'Z', ItemLoader.damagedHalo, 'W', ItemLoader.basicPendant);
+        GameRegistry.addRecipe(new ItemStack(ItemLoader.nathanielPower), "X", "Y", 'X', ItemLoader.heart, 'Y', ItemLoader.dormantCrystal);
 
 
 

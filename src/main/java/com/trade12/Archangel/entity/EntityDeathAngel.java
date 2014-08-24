@@ -57,8 +57,8 @@ public class EntityDeathAngel extends EntityZombie {
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(100.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.5D);
-        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2D);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(3.0D);
     }
 
  /**   protected void entityInit()
@@ -108,7 +108,7 @@ public class EntityDeathAngel extends EntityZombie {
     protected void fall(float x) {}
     protected String getLivingSound()
     {
-        return ("archangel:DeathAngel"); //todo fix sound
+        return ("archangel:DeathAngel");
     }
     protected String getHurtSound()
 
@@ -128,14 +128,14 @@ public class EntityDeathAngel extends EntityZombie {
 
     protected void dropFewItems(boolean bool, int nom)
     {
-        this.dropItem(Items.feather, 3);
+        this.dropItem(Items.quartz, 3);
     }
 
 
 
     protected void dropRareDrop(int par1)
     {
-        this.dropItem(ItemLoader.ostrichFeather, 1);
+        this.dropItem(ItemLoader.heart, 1);
     } //todo item angel taintedHeart
 
 

@@ -59,6 +59,7 @@ public class Ref {
     public static final String UNLOCALISED_ANGEL_PURITY = "angelPurity";
     public static final String UNLOCALISED_PURE_SEED = "pureSeed";
     public static final String UNLOCALISED_PEBBLES = "pebbles";
+    public static final String UNLOCALISED_HEART = "heart";
 
 
 

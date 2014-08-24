@@ -130,7 +130,7 @@ public class ModelDeathAngel extends ModelBase {
 
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5,Entity entity)
     {
-        GL11.glRotated(90, 0, 1, 0);
+        //GL11.glRotated(90, 0, 1, 0);
         super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
     }
 
