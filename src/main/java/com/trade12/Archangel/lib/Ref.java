@@ -74,9 +74,9 @@ public class Ref {
 
     public static final String UNLOCALISED_CRAFTING_RUNE_1 = "craftingRune";
     public static final String UNLOCALISED_SARIEL_PRODUCER = "sarielProducer";
-    // public static final String UNLOCALISED
-    // public static final String UNLOCALISED
-    // public static final String UNLOCALISED
+    public static final String UNLOCALISED_RINGSLATE = "ringSlate";
+    public static final String UNLOCALISED_BLANKSLATE = "blankSlate";
+    public static final String UNLOCALISED_PENDANTSLATE = "pendantSlate";
     // public static final String UNLOCALISED
     // public static final String UNLOCALISED
 
