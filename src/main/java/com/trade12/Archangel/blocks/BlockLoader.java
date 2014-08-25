@@ -17,6 +17,8 @@ public class BlockLoader {
         cloud = new BlockCloud(Ref.UNLOCALISED_CLOUD);
 
         AngelRune = new BlockAngelRune(Ref.UNLOCALISED_ANGELRUNE);
+        SarielRune = new BlockSarielRune(Ref.UNLOCALISED_SARIELRUNE);
+        NathanielRune = new BlockNathanielRune(Ref.UNLOCALISED_NATHANIELRUNE);
 
 
         GameRegistry.registerBlock(cloud, "Archangel_clouds");
