@@ -64,6 +64,23 @@ public class Ref {
     public static final String UNLOCALISED_PEBBLES = "pebbles";
     public static final String UNLOCALISED_HEART = "heart";
 
+    //Blocks
+    public static final String UNLOCALISED_CLOUD = "cloudBlock";
+
+    public static final String UNLOCALISED_ANGELRUNE ="angelRune";
+    public static final String UNLOCALISED_ARIELRUNE ="arielRune";
+    public static final String UNLOCALISED_SARIELRUNE ="sarielRune";
+    public static final String UNLOCALISED_NATHANIELRUNE ="nathanielRune";
+
+    public static final String UNLOCALISED_CRAFTING_RUNE_1 = "craftingRune";
+    // public static final String UNLOCALISED
+    // public static final String UNLOCALISED
+    // public static final String UNLOCALISED
+    // public static final String UNLOCALISED
+    // public static final String UNLOCALISED
+    // public static final String UNLOCALISED
+
+
 
 
     //Sound
@@ -75,6 +92,10 @@ public class Ref {
     public static final int MAX_CHARGE_DEFAULT = 500;
     public static final int MAX_CHARGE_MAX = 5000;
     public static final String MAX_CHARGE_DESC = "Maximum Charge for items.";
+
+    public static final String TIME_BLOCK_NAME = "timeBlock";
+    public static final boolean TIME_BLOCK_DEFAULT = true;
+    public static final String TIME_BLOCK_DESC = "Can time be manipulated using the Rune of Crafting?";
 
     public static final String TWEAKS_GROUP = "tweaks";
 }

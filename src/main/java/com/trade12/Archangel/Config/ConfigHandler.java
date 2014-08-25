@@ -14,6 +14,7 @@ public class ConfigHandler {
 
     public static Configuration configuration;
     public static int maxCharge = 500;
+    public static boolean timeBlock =false;
 
     public static void init(File file)
     {
@@ -27,6 +28,7 @@ public class ConfigHandler {
     private static void loadConfiguration()
     {
         maxCharge = configuration.getInt(Ref.MAX_CHARGE_NAME, Ref.TWEAKS_GROUP, maxCharge, Ref.MAX_CHARGE_DEFAULT, Ref.MAX_CHARGE_MAX, Ref.MAX_CHARGE_DESC);
+        timeBlock = configuration.getBoolean(Ref.TIME_BLOCK_NAME, Ref.TWEAKS_GROUP, Ref.TIME_BLOCK_DEFAULT, Ref.TIME_BLOCK_DESC);
         if (configuration.hasChanged())
         {
             configuration.save();

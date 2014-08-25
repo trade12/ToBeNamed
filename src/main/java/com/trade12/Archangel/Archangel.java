@@ -6,6 +6,7 @@ import com.trade12.Archangel.Handler.RecipeHandler;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.Proxy.CommonProxy;
 import com.trade12.Archangel.addon.enchiridion.EnchiridionHandler;
+import com.trade12.Archangel.blocks.BlockLoader;
 import com.trade12.Archangel.entity.EntityDeathAngel;
 import com.trade12.Archangel.entity.EntityHandler;
 import com.trade12.Archangel.entity.EntityOstrich;
@@ -60,6 +61,7 @@ public class Archangel {
         RecipeHandler.initRecipes();
         EnchiridionHandler.load();
         Log.init();
+        BlockLoader.load();
 
 
     }
