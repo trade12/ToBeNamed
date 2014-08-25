@@ -5,6 +5,7 @@
 
 ## Other
 /dep
+/us.stackdump
 
 ## eclipse
 /eclipse
@@ -21,3 +22,4 @@
 /*.ipr
 /*.iws
 /atlassian-ide-plugin.xml
+us.stackdump
