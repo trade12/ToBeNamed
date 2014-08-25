@@ -1,4 +1,4 @@
-package com.trade12.Archangel.blocks.TileEntity;
+package com.trade12.Archangel.blocks;
 
 import com.trade12.Archangel.Archangel;
 import com.trade12.Archangel.blocks.BlockLoader;

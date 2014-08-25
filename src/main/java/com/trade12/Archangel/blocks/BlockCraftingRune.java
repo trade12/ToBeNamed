@@ -111,7 +111,7 @@ public class BlockCraftingRune extends Block {
                 Blocks.obsidian, Blocks.obsidian,
                 Blocks.obsidian, Blocks.gold_block, Blocks.obsidian,
 
-                Blocks.air, BlockLoader.focusCrystalSlate, Blocks.air,
+                Blocks.air, BlockLoader.RefinedCrystalSlate, Blocks.air,
                 Blocks.air, Blocks.air,
                 Blocks.air, Blocks.air, Blocks.air);
 

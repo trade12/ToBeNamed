@@ -77,11 +77,15 @@ public class Ref {
     public static final String UNLOCALISED_RINGSLATE = "ringSlate";
     public static final String UNLOCALISED_BLANKSLATE = "blankSlate";
     public static final String UNLOCALISED_PENDANTSLATE = "pendantSlate";
-    public static final String UNLOCALISED_INFERNALFB = "infernalFireBox";
+    public static final String UNLOCALISED_NATHANIELFB = "nathanielFireBox";
     public static final String UNLOCALISED_BELTSLATE = "beltSlate";
     public static final String UNLOCALISED_NATHANIEL_BANGLE = "nathanielBangle";
     public static final String UNLOCALISED_ARIEL_ADAPTER = "arielAdapter";
+    public static final String UNLOCALISED_REFINEDSLATE = "refinedCrystalSlate";
+    public static final String UNLOCALISED_DORMANT_RUNE = "dormantRune";
+    public static final String UNLOCALISED_ANGEL_VENT = "angelVent";
     // public static final String UNLOCALISED
+
 
 
 
