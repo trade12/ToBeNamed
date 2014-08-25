@@ -10,15 +10,15 @@ import com.trade12.Archangel.entity.EntityDeathAngel;
 import com.trade12.Archangel.entity.EntityHandler;
 import com.trade12.Archangel.entity.EntityOstrich;
 import com.trade12.Archangel.lib.Ref;
+import com.trade12.Archangel.lib.Log;
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import enchiridion.Enchiridion;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+
 
 
 /**
@@ -27,7 +27,15 @@ import net.minecraft.item.Item;
 @Mod(modid= Ref.MOD_ID, name=Ref.MOD_NAME, version=Ref.VERSION_NUMBER, dependencies = Ref.DEPENDENCIES, guiFactory = Ref.MOD_GUI_FACTORY)
 public class Archangel {
 
-    @SidedProxy(clientSide = Ref.CLIENT_PROXY_CLASS, serverSide = Ref.SERVER_PROXY_CLASS)
+    @Mod.Instance(value = Ref.MOD_ID)
+    public static Archangel instance;
+
+    @SidedProxy(
+
+            clientSide = Ref.CLIENT_PROXY_CLASS,
+            serverSide = Ref.SERVER_PROXY_CLASS
+    )
+
     public static CommonProxy proxy;
 
     public static CreativeTabs tabCustom = new CreativeTabs("Archangel")
@@ -35,7 +43,7 @@ public class Archangel {
         @Override
         public Item getTabIconItem()
         {
-            return Item.getItemFromBlock(Blocks.quartz_block);
+            return (ItemLoader.angelPendant);
         }
     };
 
@@ -46,11 +54,12 @@ public class Archangel {
     {
         ConfigHandler.init(event.getSuggestedConfigurationFile());
         ItemLoader.load();
-        EntityHandler.registerEntityWithOstrachSpawns(EntityOstrich.class, "entityOstrach", 0x663300, 0x996600, 1, 2, 100);
-        EntityHandler.registerEntityWithDeathAngelSpawns(EntityDeathAngel.class, "entityDeathAngel", 0x996600, 0x663300, 1, 2, 100);
+        EntityHandler.registerEntityWithOstrachSpawns(EntityOstrich.class, "entityOstrach", 0x663300, 0x996600, 1, 2, 1);
+        EntityHandler.registerEntityWithDeathAngelSpawns(EntityDeathAngel.class, "entityDeathAngel", 0x996600, 0x663300, 1, 2, 1);
         proxy.initRenders();
         RecipeHandler.initRecipes();
         EnchiridionHandler.load();
+        Log.init();
 
 
     }

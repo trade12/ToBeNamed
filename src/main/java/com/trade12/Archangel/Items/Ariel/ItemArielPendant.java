@@ -87,7 +87,7 @@ public class ItemArielPendant extends Item implements IBauble {
                     ChargeHandler.removeCharge(itemStack, 10);
                 }
 
-                if (KeyHandler.pendant && ChargeHandler.hasEnoughChargeForOperation(itemStack, 10))
+                if (KeyHandler.pendant && ChargeHandler.hasEnoughChargeForOperation(itemStack, 100))
                 {
                     active = true;
                     double posY = player.posY-1.5;
@@ -95,7 +95,7 @@ public class ItemArielPendant extends Item implements IBauble {
                     int y = (int) posY;
                     int z = (int) player.posZ;
                     growBlocks(player.worldObj, x, y, z);
-                    ChargeHandler.removeCharge(itemStack, 10);
+                    ChargeHandler.removeCharge(itemStack, 100);
                 }
 
                 if (!KeyHandler.pendant)

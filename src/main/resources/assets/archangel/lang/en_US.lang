@@ -1,0 +1,44 @@
+//Archangel
+itemGroup.Archangel=Archangel
+key.Archangel.category=Archangel
+key.Archangel.descBelt=Belt Ability Toggle
+key.Archangel.descPendant=Pendant Ability Toggle
+
+//Items
+item.angelBelt.name= Angel Belt
+item.angelPendant.name= Angel Pendant
+item.angelPower.name= Mystical Power Source (Angel)
+item.angelRing.name= Angel Ring
+
+item.arielBelt.name= Ariel Belt
+item.arielPendant.name= Ariel Pendant
+item.arielPower.name= Mystical Power Source (Ariel)
+item.arielRing.name= Ariel Ring
+
+item.nathanielBelt.name= Nathaniel Belt
+item.nathanielPendant.name= Nathaniel Pendant
+item.nathanielPower.name= Mystical Power Source (Nathaniel)
+item.nathanielRing.name= Nathaniel Ring
+item.nathanielStone.name= Nathaniel Stone
+
+item.sarielBelt.name= Sariel Belt
+item.sarielPendant.name= Sariel Pendant
+item.sarielPower.name= Mystical Power Source (Sariel)
+item.sarielRing.name= Sariel Ring
+
+item.angelPillow.empty.name= Empty Bottle
+item.angelPillow.full.name= Bottle of Angel Pillow
+item.angelPurity.name= Angel Purity
+item.angelSilk.name= Angel Silk
+item.basicBelt.name= Basic Belt
+item.basicPendant.name= Basic Pendant
+item.basicRing.name= Basic Ring
+item.damagedHalo.name= Damaged Halo
+item.dormantCrystal.name= Dormant Crystal
+item.empoweredFocus.name= Empowered Focus
+item.fishBones.name= Fish Bones
+item.heart.name= Tainted Heart
+item.heavensDwelling.name= Heaven's Dwelling
+item.ostrichFeather.name= Ostrich Feather
+item.pebbles.name= Pebble
+item.pureSeed.name= Pure Seed

@@ -71,7 +71,7 @@ public class ChargeHandler {
         }
     }
 
-    public static void setCharge(ItemStack itemStack, int amount)
+public static void setCharge(ItemStack itemStack, int amount)
     {
         if (!isTagNull(itemStack))
         {
@@ -84,11 +84,11 @@ public class ChargeHandler {
         if (itemStack.stackTagCompound == null)
         {
             itemStack.setTagCompound(new NBTTagCompound());
-            return false;
+            return true;
         }
         else
         {
-            return true;
+            return false;
         }
     }
 

@@ -84,7 +84,7 @@ public class ItemSarielBelt extends Item implements IBauble {
                         EntityPlayerMP playerMP = (EntityPlayerMP) player;
                         float rand = itemRand.nextFloat();
                         if (playerMP.playerNetServerHandler.func_147362_b().isChannelOpen()) {
-                            EnderTeleportEvent event = new EnderTeleportEvent(playerMP, playerMP.posX + rand, playerMP.posY + 3, playerMP.posZ + rand, 5.0F);
+                            EnderTeleportEvent event = new EnderTeleportEvent(playerMP, playerMP.posX + rand + 25, playerMP.posY + 10, playerMP.posZ + rand + 30, 5.0F);
                             playerMP.setPositionAndUpdate(event.targetX, event.targetY, event.targetZ);
                             playerMP.fallDistance = 0.0F;
                             ChargeHandler.removeCharge(itemStack, 10);
@@ -92,9 +92,9 @@ public class ItemSarielBelt extends Item implements IBauble {
                     }
                 }
 
-                if (KeyHandler.belt && ChargeHandler.hasEnoughChargeForOperation(itemStack, 2)) {
+                if (KeyHandler.belt && ChargeHandler.hasEnoughChargeForOperation(itemStack, 50)) {
                     player.addExperience(1);
-                    ChargeHandler.removeCharge(itemStack, 2);
+                    ChargeHandler.removeCharge(itemStack, 50);
                     active = true;
                 }
 

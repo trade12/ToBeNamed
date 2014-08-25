@@ -8,8 +8,7 @@
         <item>angelPendant</item>
     </info>
 
-    <register type="item" unlocalized="ItemAngelPendant" name="angelPendant"></register>
-
+    <register type="item" unlocalized="item.angelPendant.name" name="angelPendant"></register>
 
     <page>
         <text x="92" y="-13" bold="true">Introduction!</text>
@@ -20,13 +19,9 @@
         <text x="92" y="-13" bold="true">Overview</text>
         <text>In this book, you will gain information on:
             •Charge
-            •Angel Crafting Materials
             •Angel's Baubles
-            •Nathaniel Crafting Materials
             •Nathaniel Baubles
-            •Ariel Crafting Materials
             •Ariel Baubles
-            •Sariel Crafting Materials
             •Sariel Baubles
         </text>
     </page>
@@ -35,13 +30,28 @@
         <text>Charge is the magical energy that all bauble items are powered by. Each type of Bauble will require a different type of charge depending on which angel the item is from, you will find more details about this on the corresponding page.</text>
     </page>
     <page>
-            <text x="92" y="-13" bold="true">Angel Pendant</text>
-    <text>The angel ring is from the first known Archangel and grants the person who uses it the ability to ascend and descend from the heavens themselves. The only problem is, the ring was designed for angels only meaning the only way for it to charge with mystical power is to be at a great height (around Y=200).</text>
-        <crafting x="100" y="119" size="1.00">
-        <craft1>ostrichFeather|ostrichFeather|</craft1>
-        <craft2>angelPillow|basicPendant|angelPillow|</craft2>
-        <craft3>||angelPillow|emerald</craft3>
-        <craftResult num="1">angelPendant</craftResult>
-        </crafting>
+            <text x="92" y="-13" bold="true">Angel Items</text>
+    <text >The angel pendant is from the first known Archangel and grants the person who uses it the ability to ascend and descend from the heavens themselves. The only problem is, the ring was designed for angels only meaning the only way for it to charge with mystical power is to be at a great height (around Y=200).</text>
+    <text x="0" y="80">Angels require the ability to easily get around and travel at great speeds, in order to do this they created a harness to increase walk speed of the angel who wears it. This item also requires the wearer to be at Y=200 in order to charge it.</text>
+    <text x="0" y="160">The Angel Ring gives the wearer the wings of an angel which allows them to fly around as long as they have mystical power.</text>
+    </page>
+    <page>
+        <text x="92" y="-13" bold="true">Nathaniel Items</text>
+        <text>A rogue angel who was sentenced to live in the bowls of hell for all eternity, in order to stay safe Nathaniel created a belt that protected damaged from heat source. This allowed Nathaniel wonder freely in ‘Hell’.</text>
+        <text x="0" y="60">The true power of this pendant is unknown by most and will remain a mystery to those who don’t try the item and its great power.</text>
+        <text x="0" y="100">Lava is a great power source but can be hard to obtain, this ring allows Nathaniel to easily fill containers with lava and power items that he might need.</text>
+        <text x="0" y="140">The Nathaniel Stone is created by surrouding stone with lava buckets but, in order to create items with this stone you first need to take the stone to the hell in which it was first made.</text>
+    </page>
+    <page>
+        <text x="92" y="-13" bold="true">Ariel Items</text>
+        <text>This item is the creation of Ariel, the angel of the land, it allows the user to create animals from mystical energy….but with this power comes a drawback as Ariel was never meant to be on the ground.</text>
+        <text x="0" y="60">Ariel is very inpatient and requires her crops to grow faster than usually, in order to do this she created a pendant that speeds up time around her and allows crops to progress much quicker than usual.</text>
+        <text x="0" y="120">With this power comes danger from the mortals, in order to protect herself Ariel created a ring that allows her to absorb any object that hits her and prevents from taking as much damage if she didn’t have the ring</text>
+    </page>
+    <page>
+        <text x="92" y="-13" bold="true">Sariel Items</text>
+        <text>Sariel was an angel who couldn’t control the power they were given and therefor the items they created to assist them were unstable and dangerous in the wrong hands. It is told this item allows the user to move themselves from one space to another instantly but controlling the destination isn’t as easy.</text>
+        <text x="0" y="80">When creating items Sariel lost control of a creation and it took her site. With help from others they created a way for her to further see once more.</text>
+        <text x="0" y="120">Unknown...it seems the power of this item has been lost in time.</text>
     </page>
 </book>

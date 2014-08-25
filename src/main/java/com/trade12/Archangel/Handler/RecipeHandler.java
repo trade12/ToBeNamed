@@ -61,6 +61,8 @@ public class RecipeHandler {
         GameRegistry.addRecipe(new ItemStack(ItemLoader.sarielPendant), "ZZ ", "YWY", " YX", 'X', ItemLoader.empoweredFoucs, 'Y', heavensDwellingFull, 'Z', Blocks.end_stone, 'W', ItemLoader.basicPendant);
         GameRegistry.addRecipe(new ItemStack(ItemLoader.sarielPower), "X", "Y", 'X', heavensDwellingFull, 'Y', ItemLoader.dormantCrystal);
 
+        GameRegistry.addShapelessRecipe(new ItemStack(ItemLoader.guideBook), new ItemStack(Items.book), new ItemStack(ItemLoader.ostrichFeather));
+
 
 
     }

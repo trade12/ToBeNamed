@@ -22,12 +22,12 @@ public class Ref {
     public static final String UNLOCALISED_SARIEL_RING = "sarielRing";
     public static final String UNLOCALISED_SARIEL_POWER = "sarielPower";
     public static final String UNLOCALISED_SARIEL_BELT = "sarielBelt";
-    public static final String UNLOCALISED_SARIEL_PENDANT = "SarielPendant";
+    public static final String UNLOCALISED_SARIEL_PENDANT = "sarielPendant";
 
     public static final String UNLOCALISED_NATHANIEL_RING = "nathanielRing";
     public static final String UNLOCALISED_NATHANIEL_POWER = "nathanielPower";
     public static final String UNLOCALISED_NATHANIEL_BELT = "nathanielBelt";
-    public static final String UNLOCALISED_NATHANIEL_PENDANT = "nathaniel_Pendant";
+    public static final String UNLOCALISED_NATHANIEL_PENDANT = "nathanielPendant";
 
     public static final String UNLOCALISED_ARIEL_RING = "arielRing";
     public static final String UNLOCALISED_ARIEL_POWER = "arielPower";
