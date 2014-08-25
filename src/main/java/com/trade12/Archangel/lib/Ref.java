@@ -79,8 +79,8 @@ public class Ref {
     public static final String UNLOCALISED_PENDANTSLATE = "pendantSlate";
     public static final String UNLOCALISED_INFERNALFB = "infernalFireBox";
     public static final String UNLOCALISED_BELTSLATE = "beltSlate";
-    // public static final String UNLOCALISED
-    // public static final String UNLOCALISED
+    public static final String UNLOCALISED_NATHANIEL_BANGLE = "nathanielBangle";
+    public static final String UNLOCALISED_ARIEL_ADAPTER = "arielAdapter";
     // public static final String UNLOCALISED
 
 
