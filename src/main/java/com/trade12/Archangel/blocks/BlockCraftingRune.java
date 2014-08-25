@@ -115,9 +115,9 @@ public class BlockCraftingRune extends Block {
                 Blocks.air, Blocks.air,
                 Blocks.air, Blocks.air, Blocks.air);
 
-        addRecipeOutput1(world, x, y, z, Blocks.obsidian, Blocks.cobblestone, BlockLoader.inertRune);
+     /**   addRecipeOutput1(world, x, y, z, Blocks.obsidian, Blocks.cobblestone, BlockLoader.inertRune);
 
-        transformIntoT2(world, x, y, z);
+        transformIntoT2(world, x, y, z); **/
 
         return true;
     }
@@ -223,7 +223,7 @@ public class BlockCraftingRune extends Block {
         }
     }
 
-    public void transformIntoT2(World world, int x, int y, int z)
+  /**  public void transformIntoT2(World world, int x, int y, int z)
     {
         if (world.getBlock(x + 1, y, z) == Blocks.obsidian && world.getBlock(x + 1, y, z + 1) == Blocks.gold_block &&
                 world.getBlock(x + 1, y, z - 1) == Blocks.gold_block &&
@@ -254,5 +254,5 @@ public class BlockCraftingRune extends Block {
 
             world.setBlock(x, y, z, BlockLoader.craftingBlockT2);
         }
-    }
+    } **/
 }

@@ -11,6 +11,8 @@ public class BlockLoader {
 
     public static Block cloud;
     public static Block AngelRune, ArielRune, NathanielRune, SarielRune;
+    public static Block blankSlate, beltSlate, ringSlate, pendantSlate, focusCrystalSlate; //todo rename focusCrystal
+    public static Block AngelVent, NathanielFireBox, SarielProducer;
 
     public static void load()
     {
@@ -19,6 +21,10 @@ public class BlockLoader {
         AngelRune = new BlockAngelRune(Ref.UNLOCALISED_ANGELRUNE);
         SarielRune = new BlockSarielRune(Ref.UNLOCALISED_SARIELRUNE);
         NathanielRune = new BlockNathanielRune(Ref.UNLOCALISED_NATHANIELRUNE);
+
+        blankSlate = new BlockBlankSlate(Ref.UNLOCALISED_BLANKSLATE);
+        beltSlate = new BlockBeltSlate(Ref.UNLOCALISED_BELTSLATE);
+
 
 
         GameRegistry.registerBlock(cloud, "Archangel_clouds");
