@@ -10,6 +10,7 @@ import com.trade12.Archangel.blocks.BlockLoader;
 import com.trade12.Archangel.entity.EntityDeathAngel;
 import com.trade12.Archangel.entity.EntityHandler;
 import com.trade12.Archangel.entity.EntityOstrich;
+import com.trade12.Archangel.lib.ItemInfo;
 import com.trade12.Archangel.lib.Ref;
 import com.trade12.Archangel.lib.Log;
 import cpw.mods.fml.common.*;
@@ -62,6 +63,7 @@ public class Archangel {
         EnchiridionHandler.load();
         Log.init();
         BlockLoader.load();
+        ItemInfo.RegisterStuff();
 
 
     }
