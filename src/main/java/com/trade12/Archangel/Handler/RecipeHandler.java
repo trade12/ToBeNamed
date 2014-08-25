@@ -1,6 +1,7 @@
 package com.trade12.Archangel.Handler;
 
 import com.trade12.Archangel.Items.ItemLoader;
+import com.trade12.Archangel.blocks.BlockLoader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -62,7 +63,7 @@ public class RecipeHandler {
         GameRegistry.addRecipe(new ItemStack(ItemLoader.sarielPower), "X", "Y", 'X', heavensDwellingFull, 'Y', ItemLoader.dormantCrystal);
 
         GameRegistry.addShapelessRecipe(new ItemStack(ItemLoader.guideBook), new ItemStack(Items.book), new ItemStack(ItemLoader.ostrichFeather));
-
+        GameRegistry.addRecipe(new ItemStack(BlockLoader.CraftingRune), "YXY", "XZW", "YXY", 'Y', Blocks.quartz_ore, 'X', Blocks.glowstone, 'Z', Blocks.obsidian, 'W', ItemLoader.ostrichFeather);
 
 
     }
