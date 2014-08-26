@@ -5,6 +5,7 @@ import com.trade12.Archangel.Handler.KeyHandler;
 import com.trade12.Archangel.Handler.RecipeHandler;
 import com.trade12.Archangel.Items.ItemLoader;
 import com.trade12.Archangel.NEI.InfoHandler;
+import com.trade12.Archangel.NEI.NEIConfiguration;
 import com.trade12.Archangel.Proxy.CommonProxy;
 import com.trade12.Archangel.addon.enchiridion.EnchiridionHandler;
 import com.trade12.Archangel.blocks.BlockLoader;
@@ -54,7 +55,7 @@ public class Archangel {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-
+        
         ConfigHandler.init(event.getSuggestedConfigurationFile());
         ItemLoader.load();
         EntityHandler.registerEntityWithOstrachSpawns(EntityOstrich.class, "entityOstrach", 0x663300, 0x996600, 1, 2, 1);
