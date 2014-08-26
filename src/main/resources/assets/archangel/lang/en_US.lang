@@ -43,4 +43,14 @@ item.ostrichFeather.name= Ostrich Feather
 item.pebbles.name= Pebble
 item.pureSeed.name= Pure Seed
 
+
+	flute.tips.0=Hmm... looks like a musical instrument
+	flute.tips.1=Its sound can be heard from a long distance...
+	flute.tips.2=Sorry, I can't be used!
+
+	flute.dragonExist.0=Looks like there is a dragon somewhere...
+	flute.dragonExist.1=Oh! There is the Ender Dragon! Have you looked under the egg?
+	flute.dragonExist.2=There can't be more dragons in this dimension...
+	flute.dragonExist.3=There should be a dragon somewhere around here...
+
 item.sarielBelt.documentation=Powerful belt that grants XXXX

@@ -2,5 +2,6 @@
     "ostrichSay": {"category": "ambient","sounds": ["ostrich_say"]},
     "DeathAngel": {"category": "hostile","sounds": ["DeathAngel_say"]},
     "DeathAngelHurt": {"category": "hostile","sounds": ["DeathAngel_hurt"]},
-    "DeathAngelDeath": {"category": "hostile","sounds": ["DeathAngel_death"]}
+    "DeathAngelDeath": {"category": "hostile","sounds": ["DeathAngel_death"]},
+    "flute": {"category": "master","sounds": ["flute_sound"]}
 }
