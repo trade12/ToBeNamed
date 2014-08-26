@@ -2,6 +2,9 @@ package com.trade12.Archangel.NEI;
 
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
+import com.trade12.Archangel.lib.Log;
+
+import javax.sound.midi.MidiDevice;
 
 /**
  * Created by Kieran on 25/08/2014.
@@ -12,7 +15,9 @@ public class NEIConfiguration implements IConfigureNEI {
     public void loadConfig()
     {
         API.registerRecipeHandler(new NEICraftingRuneRecipeHandler());
-        System.out.println("Loaded NEI!");
+        API.registerRecipeHandler(new InfoHandler());
+        API.registerUsageHandler(new InfoHandler());
+        Log.info("Loaded NEI Support for Archangel");
     }
 
     @Override
