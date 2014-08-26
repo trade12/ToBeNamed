@@ -23,10 +23,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.RegistryNamespaced;
 import net.minecraft.util.StatCollector;
-
+/**
 /**
  * Created by Kieran on 25/08/2014.
- */
+
 public class InfoHandler implements IUsageHandler, ICraftingHandler {
 
     public static FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
@@ -269,3 +269,4 @@ public class InfoHandler implements IUsageHandler, ICraftingHandler {
         return this;
     }
 }
+*/
