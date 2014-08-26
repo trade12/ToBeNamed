@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
  */
 public class RenderDeathAngel extends RenderLiving {
 
-    private static final ResourceLocation texture = new ResourceLocation("archangel", "textures/entity/DeathAngel.png"); //todo fix texture
+    private static final ResourceLocation texture = new ResourceLocation("archangel", "textures/entity/DeathAngel.png");
     //private static final ResourceLocation texture = new ResourceLocation("Archangel" + "textures/entity/ostrich.png");
 
     public RenderDeathAngel(ModelBase modelBase, float i)

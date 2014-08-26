@@ -104,7 +104,7 @@ public class ItemAngelRing extends Item implements IBauble {
     {
         if (!entity.worldObj.isRemote)
         {
-            entity.worldObj.playSoundAtEntity(entity, "Sound", 0.1F, 1.3F); //todo: add sound and input directory
+            entity.worldObj.playSoundAtEntity(entity, "random.pop", 0.1F, 1.3F);
         }
     }
 
@@ -116,7 +116,7 @@ public class ItemAngelRing extends Item implements IBauble {
             EntityPlayer player = (EntityPlayer)entity;
             if (!player.worldObj.isRemote && !player.capabilities.isCreativeMode)
             {
-                player.worldObj.playSoundAtEntity(player, "Sound", 0.1F, 1.3F); //todo: add sound
+                player.worldObj.playSoundAtEntity(player, "random.pop", 0.1F, 1.3F);
                 player.capabilities.allowFlying = false;
                 player.capabilities.isFlying = false;
             }

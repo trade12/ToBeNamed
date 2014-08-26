@@ -40,7 +40,7 @@ project.ext {
 
 
 minecraft {
-    version = "${project.ext.mcVersion}-10.13.0.1208"
+    version = "${project.ext.mcVersion}-10.13.0.1187"
 
     // replacing stuff in the source
     replace '@VERSION@', project.version

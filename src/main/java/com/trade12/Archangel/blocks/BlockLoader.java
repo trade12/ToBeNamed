@@ -12,7 +12,7 @@ public class BlockLoader {
 
     public static Block cloud;
     public static Block AngelRune, ArielRune, NathanielRune, SarielRune, DormantRune;
-    public static Block blankSlate, beltSlate, ringSlate, pendantSlate, RefinedCrystalSlate; //todo rename focusCrystal
+    public static Block blankSlate, beltSlate, ringSlate, pendantSlate, RefinedCrystalSlate;
     public static Block AngelVent, NathanielFireBox, SarielProducer;
     public static Block NathanielBangle;
     public static Block CraftingRune;

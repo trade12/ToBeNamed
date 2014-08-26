@@ -136,7 +136,7 @@ public class EntityDeathAngel extends EntityZombie {
     protected void dropRareDrop(int par1)
     {
         this.dropItem(ItemLoader.heart, 1);
-    } //todo item angel taintedHeart
+    }
 
 
 
