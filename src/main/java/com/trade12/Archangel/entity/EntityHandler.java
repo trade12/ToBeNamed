@@ -4,6 +4,7 @@ import com.trade12.Archangel.Archangel;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.biome.BiomeGenHell;
@@ -64,6 +65,7 @@ public class EntityHandler
         EntityRegistry.registerGlobalEntityID(entityClass, name, entityID);
         EntityRegistry.registerModEntity(entityClass, name, entityID, instance, 64, 1, true);
         EntityRegistry.addSpawn(entityClass,rarity,min,max, EnumCreatureType.creature, BiomeGenBase.hell);
+        EntityList.entityEggs.put(Integer.valueOf(entityID), new EntityList.EntityEggInfo(entityID, primaryColour, secondaryColour));
     }
 
 
