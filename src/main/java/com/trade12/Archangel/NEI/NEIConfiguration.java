@@ -12,8 +12,7 @@ public class NEIConfiguration implements IConfigureNEI {
     public void loadConfig()
     {
         API.registerRecipeHandler(new NEICraftingRuneRecipeHandler());
-        API.registerUsageHandler(new InfoHandler());
-        API.registerRecipeHandler(new InfoHandler());
+
         System.out.println("Loaded NEI for Archangel!");
     }
 

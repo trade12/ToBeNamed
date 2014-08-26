@@ -83,7 +83,7 @@ public class EntityOstrich extends EntityAnimal {
     protected void fall(float x) {}
     protected String getLivingSound()
     {
-        return ("archangel:ostrichSay"); //todo fix sound
+        return ("archangel:ostrichSay");
     }
     protected String getHurtSound()
 

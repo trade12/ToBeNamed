@@ -84,7 +84,7 @@ public class Ref {
     public static final String UNLOCALISED_REFINEDSLATE = "refinedCrystalSlate";
     public static final String UNLOCALISED_DORMANT_RUNE = "dormantRune";
     public static final String UNLOCALISED_ANGEL_VENT = "angelVent";
-    // public static final String UNLOCALISED
+    public static final String UNLOCALISED_ANGEL_WHISTLE = "angelWhistle";
 
 
 
