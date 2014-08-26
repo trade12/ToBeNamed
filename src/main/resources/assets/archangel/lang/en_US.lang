@@ -43,6 +43,9 @@ item.ostrichFeather.name= Ostrich Feather
 item.pebbles.name= Pebble
 item.pureSeed.name= Pure Seed
 
+entity.entityDeathAngel.name= Death Angel
+entity.entityOstrach.name=Ostrich
+
 
 flute.tips.0=Hmm... looks like a musical instrument
 flute.tips.1=Its sound can be heard from a long distance...

@@ -20,6 +20,6 @@ public class NEICraftingRuneRecipeHandler extends TemplateRecipeHandler {
     @Override
     public String getRecipeName()
     {
-        return "              " + StatCollector.translateToLocal("tile.craftingRune.name");
+        return "              " + StatCollector.translateToLocal("tile.BlockCraftingRune.name");
     }
 }
