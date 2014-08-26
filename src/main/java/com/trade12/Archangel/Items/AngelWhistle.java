@@ -1,6 +1,11 @@
 package com.trade12.Archangel.Items;
 
+import com.trade12.Archangel.Archangel;
+import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -16,6 +21,7 @@ import java.util.Random;
 
 /**
  * Created by Kieran on 22/08/2014.
+**/
 
 public class AngelWhistle extends Item {
 
@@ -25,33 +31,32 @@ public class AngelWhistle extends Item {
     public AngelWhistle()
     {
         this.maxStackSize = 1;
+        this.setMaxDamage(1);
+        this.setCreativeTab(Archangel.tabCustom);
+        this.setUnlocalizedName(Ref.UNLOCALISED_ANGEL_WHISTLE);
     }
 
-    public ItemStack onEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer)
-    {
-        return itemStack.onFoodEaten(world,entityPlayer);
-    }
 
-    public ItemStack onPlayerStoppedUsing(ItemStack itemStack, World world, EntityPlayer entity)
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entity)
     {
         if (!world.isRemote) {
-            if ((System.currentTimeMillis() - this.lastPlay) / 1000L > getItemStackLimit(itemStack) / 20)
+            if ((System.currentTimeMillis() - this.lastPlay) / 1000L > getMaxItemUseDuration(itemStack) / 20)
             {
                 this.lastPlay = System.currentTimeMillis();
 
-                world.notifyBlockChange(entity, ItemLoader.angelWhistle, 1.0F, 1.0F);
-                if ((world.notifyBlocksOfNeighborChange().getBiomeGenAt(0, 0) instanceof BiomeGenEnd))
+                world.playSoundAtEntity(entity, "archangel:flute", 1.0F, 1.0F);
+                if ((world.getWorldChunkManager().getBiomeGenAt(0, 0) instanceof BiomeGenEnd))
                 {
                     if (isDragonAlive(world) >= 1) {
-                        entity.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization("whistle.dragonExist." + rand.nextInt(4))));
+                        entity.addChatComponentMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization("flute.dragonExist." + rand.nextInt(4))));
                     }
                 }
                 else {
-                    entity.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization("whistle.tips." + rand.nextInt(3))));
+                    entity.addChatComponentMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization("flute.tips." + rand.nextInt(3))));
                 }
             }
         }
-        entity.getCurrentEquippedItem();
+        entity.setItemInUse(itemStack, getMaxItemUseDuration(itemStack));
         return itemStack;
     }
 
@@ -67,44 +72,35 @@ public class AngelWhistle extends Item {
         return dragonNum;
     }
 
-    public ItemStack func_77654_b(ItemStack itemStack, World world, EntityPlayer entity)
+    public ItemStack onEaten(ItemStack itemStack, World world, EntityPlayer entity)
     {
         if (!world.isRemote) {
-            if ((world.notifyBlockOfNeighborChange().func_76935_a(0, 0) instanceof BiomeGenEnd)) {
+            if ((world.getWorldChunkManager().getBiomeGenAt(0, 0) instanceof BiomeGenEnd)) {
                 if (isDragonAlive(world) < 1)
                 {
-                    itemStack.getTooltip(2, entity);
+                    itemStack.damageItem(2, entity);
 
                     EntityDragon entitydragon = new EntityDragon(world);
-                    entitydragon.applyEntityCollision(0.0D, 128.0D, 0.0D, rand.nextFloat() * 360.0F, 0.0F);
-                        world.doChunksNearChunkExist(entitydragon);
+                    entitydragon.setLocationAndAngles(0.0D, 128.0D, 0.0D, rand.nextFloat() * 360.0F, 0.0F);
+                    world.spawnEntityInWorld(entitydragon);
                 }
             }
         }
         return itemStack;
     }
 
-    public boolean requiresMultipleRenderPasses()
+    public boolean isFull3D()
     {
         return true;
     }
 
-    public int getItemStackLimit(ItemStack item)
+    public int getMaxItemUseDuration(ItemStack item)
     {
         return 200;
     }
 
-    public EnumAction registerIcons(ItemStack itemStack)
+    public EnumAction getItemUseAction(ItemStack par1ItemStack)
     {
         return EnumAction.block;
     }
-
-
-
-
-
-
-
 }
-
-**/
