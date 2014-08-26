@@ -54,6 +54,7 @@ public class Archangel {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
+        ItemInfo.RegisterStuff();
         ConfigHandler.init(event.getSuggestedConfigurationFile());
         ItemLoader.load();
         EntityHandler.registerEntityWithOstrachSpawns(EntityOstrich.class, "entityOstrach", 0x663300, 0x996600, 1, 2, 1);
@@ -63,7 +64,7 @@ public class Archangel {
         EnchiridionHandler.load();
         Log.init();
         BlockLoader.load();
-        ItemInfo.RegisterStuff();
+
 
 
     }

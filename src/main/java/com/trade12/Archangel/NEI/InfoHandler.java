@@ -4,16 +4,25 @@ import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.api.IOverlayHandler;
 import codechicken.nei.api.IRecipeOverlayRenderer;
+import codechicken.nei.recipe.GuiCraftingRecipe;
 import codechicken.nei.recipe.GuiRecipe;
+import codechicken.nei.recipe.GuiUsageRecipe;
 import codechicken.nei.recipe.ICraftingHandler;
 import codechicken.nei.recipe.IUsageHandler;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.ModContainer;
+import cpw.mods.fml.common.ModMetadata;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.RegistryNamespaced;
+import net.minecraft.util.StatCollector;
 
 /**
  * Created by Kieran on 25/08/2014.
@@ -22,30 +31,135 @@ public class InfoHandler implements IUsageHandler, ICraftingHandler {
 
     public static FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
     public static int color = -12566464;
-    int currentRecipe;
-    ItemStack displayItem = null;
+    ItemStack displayItem;
+    boolean precise = false;
+    String id;
+    String name;
+    String[] info;
 
     public InfoHandler()
     {
-        this.currentRecipe = -1;
+        this.displayItem = null;
     }
 
-    public InfoHandler(int currentRecipe, ItemStack item)
+    public boolean checkedOrder = false;
+
+    public boolean checkOrder()
     {
-        if (currentRecipe < InfoData.data.size()) {
-            this.currentRecipe = currentRecipe;
+        if (this.checkedOrder) {
+            return false;
         }
-        this.displayItem = item;
+        this.checkedOrder = true;
+        return changeOrder(GuiUsageRecipe.usagehandlers) | changeOrder(GuiCraftingRecipe.craftinghandlers);
+    }
+
+    public boolean changeOrder(ArrayList list)
+    {
+        int j = -1;
+        for (int i = 0; i < list.size() - 1; i++) {
+            if (list.get(i).getClass() == getClass())
+            {
+                j = i;
+                break;
+            }
+        }
+        if (j >= 0) {
+            list.add(list.remove(j));
+        }
+        return false;
+    }
+
+    int noLinesPerPage = 12;
+    public final String suffix = ".documentation";
+
+    public InfoHandler(ItemStack item)
+    {
+        if ((StatCollector.translateToLocalFormatted(item.getDisplayName() + ".documentation")) || (StatCollector.translateToLocalFormatted(item.func_77977_a() + ".documentation" + ".0")))
+        {
+            this.id = item.getDisplayName();
+            this.name = StatCollector.translateToLocal(item.getDisplayName());
+            this.precise = true;
+        }
+        else
+        {
+            this.id = item.getUnlocalizedName().toLowerCase();
+            this.name = StatCollector.translateToLocal(item.getUnlocalizedName().toLowerCase());
+            this.precise = false;
+        }
+        if (StatCollector.canTranslate(this.id + ".documentation"))
+        {
+            List<String> strings = splitString(StatCollector.translateToFallback(this.id + ".documentation"));
+            this.info = ((String[])strings.toArray(new String[strings.size()]));
+        }
+        else
+        {
+            ArrayList<String> list = new ArrayList();
+            int i = 0;
+            while (StatCollector.canTranslate(this.id + ".documentation" + "." + i))
+            {
+                String a = StatCollector.translateToFallback(this.id + ".documentation" + "." + i);
+                list.addAll(splitString(a));
+                i++;
+            }
+            this.info = ((String[])list.toArray(new String[list.size()]));
+        }
+        this.displayItem = item.func_77946_l();
+        this.displayItem.field_77994_a = 1;
+    }
+
+    public List<String> splitString(String a)
+    {
+        ArrayList<String> list = new ArrayList();
+        List b = fontRenderer.listFormattedStringToWidth(a, getWidth() - 8);
+        if (b.size() < this.noLinesPerPage)
+        {
+            list.add(a);
+        }
+        else
+        {
+            String c = "";
+            for (int j = 0; j < b.size(); j++)
+            {
+                c = c + b.get(j) + " ";
+                if ((j > 0) && (j % this.noLinesPerPage == 0))
+                {
+                    String d = c.trim();
+                    list.add(d);
+                    c = "";
+                }
+            }
+            c = c.trim();
+            if (!"".equals(c)) {
+                list.add(c);
+            }
+        }
+        return list;
     }
 
     public String getRecipeName()
     {
-        return "Archangel: Info";
+        if (this.displayItem == null) {
+            return "Documentation";
+        }
+        String s = Item.field_150901_e.func_148750_c(this.displayItem.getUnlocalizedName());
+
+        String modid = s.split(":")[0];
+        if ("minecraft".equals(modid)) {
+            return "Minecraft";
+        }
+        ModContainer selectedMod = (ModContainer) Loader.instance().getIndexedModList().get(modid);
+        if (selectedMod == null) {
+            return modid;
+        }
+        if (!selectedMod.getMetadata().autogenerated) {
+            return selectedMod.getMetadata().name;
+        }
+        return selectedMod.getName();
     }
 
     public int numRecipes()
     {
-        return this.currentRecipe < 0 ? 0 : ((InfoData)InfoData.data.get(this.currentRecipe)).info.length;
+        return (this.displayItem == null) || (this.info == null) ? 0 : this.info.length;
     }
 
     public void drawBackground(int recipe) {}
@@ -57,12 +171,12 @@ public class InfoHandler implements IUsageHandler, ICraftingHandler {
 
     public PositionedStack getResultStack(int recipe)
     {
-        return new PositionedStack(this.displayItem != null ? this.displayItem : ((InfoData)InfoData.data.get(this.currentRecipe)).item, getWidth() / 2 - 9, 0, false);
+        return new PositionedStack(this.displayItem, getWidth() / 2 - 9, 0, false);
     }
 
     public void drawForeground(int recipe)
     {
-        List text = fontRenderer.listFormattedStringToWidth(((InfoData)InfoData.data.get(this.currentRecipe)).info[recipe], getWidth() - 8);
+        List text = fontRenderer.listFormattedStringToWidth(this.info[recipe], getWidth() - 8);
         for (int i = 0; i < text.size(); i++)
         {
             String t = (String)text.get(i);
@@ -122,18 +236,20 @@ public class InfoHandler implements IUsageHandler, ICraftingHandler {
         return false;
     }
 
+    public boolean isValidItem(ItemStack item)
+    {
+        return (StatCollector.translateToLocalFormatted(item.func_77977_a() + ".documentation")) || (StatCollector.translateToLocalFormatted(item.func_77973_b().func_77658_a() + ".documentation")) || (StatCollector.translateToLocalFormatted(item.func_77977_a() + ".documentation" + ".0")) || (StatCollector.translateToLocalFormatted(item.func_77973_b().func_77658_a() + ".documentation" + ".0"));
+    }
+
     public IUsageHandler getUsageHandler(String inputId, Object... ingredients)
     {
-        if (inputId != "item") {
+        if (!inputId.equals("item")) {
             return this;
         }
-        for (int i = 0; i < ingredients.length; i++) {
-            if ((ingredients[i] instanceof ItemStack)) {
-                for (int j = 0; j < InfoData.data.size(); j++) {
-                    if (((InfoData)InfoData.data.get(j)).matches((ItemStack)ingredients[i])) {
-                        return new InfoHandler(j, (ItemStack)ingredients[i]);
-                    }
-                }
+        for (Object ingredient : ingredients) {
+            if (((ingredient instanceof ItemStack)) &&
+                    (isValidItem((ItemStack)ingredient))) {
+                return new InfoHandler((ItemStack)ingredient);
             }
         }
         return this;
@@ -141,16 +257,13 @@ public class InfoHandler implements IUsageHandler, ICraftingHandler {
 
     public ICraftingHandler getRecipeHandler(String outputId, Object... results)
     {
-        if (outputId != "item") {
+        if (!outputId.equals("item")) {
             return this;
         }
-        for (int i = 0; i < results.length; i++) {
-            if ((results[i] instanceof ItemStack)) {
-                for (int j = 0; j < InfoData.data.size(); j++) {
-                    if (((InfoData)InfoData.data.get(j)).matches((ItemStack)results[i])) {
-                        return new InfoHandler(j, (ItemStack)results[i]);
-                    }
-                }
+        for (Object result : results) {
+            if (((result instanceof ItemStack)) &&
+                    (isValidItem((ItemStack)result))) {
+                return new InfoHandler((ItemStack)result);
             }
         }
         return this;
