@@ -16,7 +16,9 @@ import com.trade12.Archangel.Items.Sariel.ItemSarielRing;
 import com.trade12.Archangel.Items.SubItems.*;
 import com.trade12.Archangel.addon.enchiridion.ItemGuideBook;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 /**
  * Created by kieran on 13/08/2014.
@@ -33,6 +35,7 @@ public class ItemLoader {
     public static Item empoweredFoucs, heavensDwelling, ostrichFeather, angelPillow, angelSilk, fishBones, dormantCrystal, damagedHalo, angelPurity, pureSeed, pebbles, heart;
     public static Item basicBelt, basicRing, basicPendant;
     public static Item guideBook;
+    public static Item featherAttraction;
 
 
     public static void load()
@@ -79,6 +82,8 @@ public class ItemLoader {
 
         guideBook = new ItemGuideBook();
 
+        featherAttraction = new ItemFeatherAttraction();
+
 
         GameRegistry.registerItem(angelPendant, "Archangel_angelPendant");
         GameRegistry.registerItem(angelRing, "Archangel_angelRing");
@@ -120,6 +125,8 @@ public class ItemLoader {
         GameRegistry.registerItem(heart, "Archangel_heart");
 
         GameRegistry.registerItem(guideBook, "Archangel_guideBook");
+
+        GameRegistry.registerItem(featherAttraction, "Archangel_featherAttraction");
 
     }
 }
