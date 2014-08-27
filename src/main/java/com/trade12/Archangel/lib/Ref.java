@@ -87,6 +87,7 @@ public class Ref {
     public static final String UNLOCALISED_ANGEL_WHISTLE = "angelWhistle";
 
     public static final String UNLOCALISED_FEATHER_ATTRACTION = "featherOfAttraction";
+    public static final String UNLOCALISED_AUTO_CLICKER = "autoClicker";
 
 
 

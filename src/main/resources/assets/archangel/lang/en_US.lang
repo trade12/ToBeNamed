@@ -1,10 +1,10 @@
-//Archangel
+#######Archangel#######
 itemGroup.Archangel=Archangel
 key.Archangel.category=Archangel
 key.Archangel.descBelt=Belt Ability Toggle
 key.Archangel.descPendant=Pendant Ability Toggle
 
-//Items
+#######Items#######
 item.angelBelt.name= Angel Belt
 item.angelPendant.name= Angel Pendant
 item.angelPower.name= Mystical Power Source (Angel)
@@ -42,7 +42,30 @@ item.heavensDwelling.name= Heaven's Dwelling
 item.ostrichFeather.name= Ostrich Feather
 item.pebbles.name= Pebble
 item.pureSeed.name= Pure Seed
+item.autoClicker.name=Angel Helper
+item.featherOfAttraction.name=Feather Of Attraction
+item.angelWhistle.name=Angel Whistle
+item.guideBook.name=Guide Book
 
+#######Blocks#######
+tile.refinedCrystalSlate.name=Refined Crystal Slate
+tile.pendantSlate.name=Pendant Slate
+tile.ringSlate.name= Ring Slate
+tile.beltSlate.name= Belt Slate
+tile.blankSlate.name=Blank Slate
+tile.dormantSlate.name=Dormant Slate[WiP]
+tile.arielRune.name=Ariel Rune
+tile.nathanielRune.name=Nathaniel Rune
+tile.sarielRune.name=Sariel Rune
+tile.angelRune.name=Angel Rune
+tile.cloudBlock.name=Angel Pillow
+tile.craftingRune.name=Crafting Rune
+tile.angelVent.name=Angel Vent
+tile.sarielProducer.name=Sariel Producer
+tile.nathanielFireBox.name=Nathaniel FireBox
+tile.nathanielBangle.name=Nathaniel's Lantern
+
+#######Entities#######
 entity.entityDeathAngel.name= Death Angel
 entity.entityOstrach.name=Ostrich
 

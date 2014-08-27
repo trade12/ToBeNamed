@@ -35,7 +35,7 @@ public class ItemLoader {
     public static Item empoweredFoucs, heavensDwelling, ostrichFeather, angelPillow, angelSilk, fishBones, dormantCrystal, damagedHalo, angelPurity, pureSeed, pebbles, heart;
     public static Item basicBelt, basicRing, basicPendant;
     public static Item guideBook;
-    public static Item featherAttraction;
+    public static Item featherAttraction, autoClicker;
 
 
     public static void load()
@@ -83,6 +83,7 @@ public class ItemLoader {
         guideBook = new ItemGuideBook();
 
         featherAttraction = new ItemFeatherAttraction();
+        autoClicker = new ItemAutoClicker();
 
 
         GameRegistry.registerItem(angelPendant, "Archangel_angelPendant");
@@ -127,6 +128,7 @@ public class ItemLoader {
         GameRegistry.registerItem(guideBook, "Archangel_guideBook");
 
         GameRegistry.registerItem(featherAttraction, "Archangel_featherAttraction");
+        GameRegistry.registerItem(autoClicker, "Archangel_autoClicker");
 
     }
 }

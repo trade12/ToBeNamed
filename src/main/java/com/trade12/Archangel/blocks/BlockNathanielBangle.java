@@ -52,7 +52,7 @@ public class BlockNathanielBangle extends Block {
     public void setBlockBoundsForItemRender()
     {
         this.setBlockBounds(0.4F, 0.4F, 0.4F, 0.5F, 0.5F, 0.5F);
-    }
+    } //todo model lantern
 
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(World world, int x, int y, int z, Random rand)
