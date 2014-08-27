@@ -43,7 +43,7 @@ public class ItemSarielBelt extends Item implements IBauble {
     @Override
     public void registerIcons(IIconRegister register)
     {
-        this.itemIcon = register.registerIcon(Ref.MOD_ID + ":" + Ref.UNLOCALISED_ANGEL_BELT);
+        this.itemIcon = register.registerIcon(Ref.MOD_ID + ":" + Ref.UNLOCALISED_SARIEL_BELT);
     }
 
     public void onCreated(ItemStack itemStack, World world, EntityPlayer player)
