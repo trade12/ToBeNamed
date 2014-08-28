@@ -100,6 +100,8 @@ public class Ref {
     //Sound
     public static final String SOUND_OSTRICH = ("archangel/sounds/ostrich_say.ogg");
 
+    public static final String MISC_PARTICLES = "textures/misc/particles.png";
+
 
     //Config Settings
     public static final String MAX_CHARGE_NAME = "maxCharge";
