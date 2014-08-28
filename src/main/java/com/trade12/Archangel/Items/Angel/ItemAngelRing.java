@@ -27,7 +27,7 @@ import java.util.List;
 
 /**
  * Created by kieran on 13/08/2014.
- */
+*/
 public class ItemAngelRing extends Item implements IBauble {
 
     int counter;

@@ -17,6 +17,7 @@ import com.trade12.Archangel.lib.Ref;
 import com.trade12.Archangel.lib.Log;
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -78,6 +79,7 @@ public class Archangel {
     public void preInitClient(FMLInitializationEvent event)
     {
         FMLCommonHandler.instance().bus().register(new KeyHandler());
+        FMLInterModComms.sendMessage("IGWMod", "com.trade12.Archangel.IGWHandler", "init");
     }
 
 

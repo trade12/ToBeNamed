@@ -9,10 +9,7 @@ buildscript {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
-        maven {
-            name = "IGW"
-            url = "http://maven.k-4u.nl/"
-        }
+
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
@@ -27,6 +24,10 @@ repositories {
     maven { // the repo from which to get NEI and stuff
         name 'CB Repo'
         url "http://chickenbones.net/maven/"
+    }
+    maven {
+        name = "IGW"
+        url = "http://maven.k-4u.nl/"
     }
 }
 
@@ -92,7 +93,7 @@ dependencies {
     compile "codechicken:CodeChickenCore:1.7.10-1.0.2.9:dev"
     compile "codechicken:NotEnoughItems:1.7.10-1.0.2.15:dev"
     compile "mcp.mobius.waila:Waila:1.5.3_1.7.10"
-    compile "igwmod:IGW-Mod-1.7.10:1.1.0-7:dev"
+    compile "igwmod:IGW-Mod-1.7.10:1.1.0-12:userdev"
 
     println("  Finished adding dependencies!")
 }

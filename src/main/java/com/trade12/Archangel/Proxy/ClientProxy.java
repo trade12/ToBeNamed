@@ -1,8 +1,12 @@
 package com.trade12.Archangel.Proxy;
 
+
+import com.trade12.Archangel.Archangel;
 import com.trade12.Archangel.WingRenderHandler;
 import com.trade12.Archangel.entity.*;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.event.FMLInterModComms;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -24,6 +28,8 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new WingRenderHandler());
     }
 
-    }
+
+
+}
 
 

@@ -3,7 +3,7 @@ package com.trade12.Archangel.Items;
 import com.trade12.Archangel.Items.Angel.ItemAngelBelt;
 import com.trade12.Archangel.Items.Angel.ItemAngelPendant;
 import com.trade12.Archangel.Items.Angel.ItemAngelPower;
-import com.trade12.Archangel.Items.Angel.ItemAngelRing;
+//import com.trade12.Archangel.Items.Angel.ItemAngelRing;
 import com.trade12.Archangel.Items.Ariel.ItemArielBelt;
 import com.trade12.Archangel.Items.Ariel.ItemArielPendant;
 import com.trade12.Archangel.Items.Ariel.ItemArielPower;
@@ -40,7 +40,7 @@ public class ItemLoader {
 
     public static void load()
     {
-        angelRing = new ItemAngelRing();
+       // angelRing = new ItemAngelRing();
         angelPower = new ItemAngelPower();
         angelBelt = new ItemAngelBelt();
         angelPendant = new ItemAngelPendant();
@@ -86,7 +86,7 @@ public class ItemLoader {
         autoClicker = new ItemAutoClicker();
 
         GameRegistry.registerItem(angelPendant, "Archangel_angelPendant");
-        GameRegistry.registerItem(angelRing, "Archangel_angelRing");
+//        GameRegistry.registerItem(angelRing, "Archangel_angelRing");
         GameRegistry.registerItem(angelBelt, "Archangel_angelBelt");
         GameRegistry.registerItem(angelPower, "Archangel_angelPower");
 

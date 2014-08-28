@@ -12,9 +12,11 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+
 /**
  * Created by Kieran on 28/08/2014.
- */
+*/
+
 public class WingRenderHandler {
 
     @SubscribeEvent
