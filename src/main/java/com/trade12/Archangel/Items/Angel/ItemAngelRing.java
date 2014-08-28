@@ -7,6 +7,7 @@ import com.trade12.Archangel.Config.ConfigHandler;
 import com.trade12.Archangel.Handler.ChargeHandler;
 import com.trade12.Archangel.Handler.PowerHandler;
 import com.trade12.Archangel.Items.ItemLoader;
+import com.trade12.Archangel.lib.IconHelper;
 import com.trade12.Archangel.lib.Ref;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -16,8 +17,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import scala.tools.nsc.interpreter.Power;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 
 import java.util.List;
 
@@ -25,7 +29,11 @@ import java.util.List;
  * Created by kieran on 13/08/2014.
  */
 public class ItemAngelRing extends Item implements IBauble {
+
     int counter;
+    public static IIcon iconWings;
+    public static IIcon iconDemonWings;
+
     public ItemAngelRing()
     {
         this.setMaxStackSize(1);
@@ -37,7 +45,9 @@ public class ItemAngelRing extends Item implements IBauble {
     @Override
     public void registerIcons(IIconRegister register)
     {
-        this.itemIcon = register.registerIcon(Ref.MOD_ID + ":" + Ref.UNLOCALISED_ANGELRING);
+        itemIcon = IconHelper.forItem(register, this, 0);
+        iconWings = IconHelper.forItem(register, this, 1);
+        iconDemonWings = IconHelper.forItem(register, this, 2);
     }
 
     public void onCreated(ItemStack itemStack, World world, EntityPlayer player)
@@ -53,7 +63,7 @@ public class ItemAngelRing extends Item implements IBauble {
     }
 
     @Override
-    public void onWornTick(ItemStack itemStack, EntityLivingBase entity)
+    public void onWornTick(ItemStack itemStack, EntityLivingBase entity, LivingUpdateEvent event)
     {
         if (entity instanceof EntityPlayer)
         {
@@ -89,9 +99,29 @@ public class ItemAngelRing extends Item implements IBauble {
                         player.capabilities.isFlying = false;
                     }
                 }
+                if (player.capabilities.isFlying)
+                {
+                    if (Math.abs(player.motionX) > 0.1 || Math.abs(player.motionZ) > 0.1)
+                    {
+                        double x = event.entityLiving.posX - 0.5;
+                        double y = event.entityLiving.posY - 1.7;
+                        double z = event.entityLiving.posZ - 0.5;
+
+                        String name = player.getGameProfile().getName();
+                        float r = 1F;
+                        float g = 1F;
+                        float b = 1F;
+
+                        if(name.equals("TheTrade12"))
+                            g = 1F - ((float) Math.random() * 0.75F + 0.25F);
+                        }
+                    for(int i = 0; i < 3; i++)
+                        Archangel.proxy.sparkleFX(event.entityLiving.worldObj, x + Math.random() * event.entityLiving.width, y + Math.random() * 0.4, z + Math.random() * event.entityLiving.width, r, g, b, 2F * (float) Math.random(), 20);
+                    }
+                }
             }
         }
-    }
+
 
     @Override
     public BaubleType getBaubleType(ItemStack itemStack)

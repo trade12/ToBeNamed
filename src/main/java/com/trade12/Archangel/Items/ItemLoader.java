@@ -85,7 +85,6 @@ public class ItemLoader {
         featherAttraction = new ItemFeatherAttraction();
         autoClicker = new ItemAutoClicker();
 
-
         GameRegistry.registerItem(angelPendant, "Archangel_angelPendant");
         GameRegistry.registerItem(angelRing, "Archangel_angelRing");
         GameRegistry.registerItem(angelBelt, "Archangel_angelBelt");
