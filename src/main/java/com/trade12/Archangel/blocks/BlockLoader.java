@@ -1,7 +1,10 @@
 package com.trade12.Archangel.blocks;
 
+import com.trade12.Archangel.blocks.Lantern.LanternRenderer;
+import com.trade12.Archangel.blocks.Lantern.TileEntityLantern;
 import com.trade12.Archangel.lib.Log;
 import com.trade12.Archangel.lib.Ref;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 
@@ -66,5 +69,7 @@ public class BlockLoader {
         GameRegistry.registerBlock(NathanielBangle, "Archangel_nathanielBangle");
 
         GameRegistry.registerBlock(CraftingRune, "Archangel_craftingRune");
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLantern.class, new LanternRenderer());
+        GameRegistry.registerTileEntity(TileEntityLantern.class, "tileEntityTrafficLight");
     }
 }

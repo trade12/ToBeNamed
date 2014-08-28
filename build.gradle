@@ -9,6 +9,10 @@ buildscript {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
+        maven {
+            name = "IGW"
+            url = "http://maven.k-4u.nl/"
+        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
@@ -75,7 +79,7 @@ sourceSets {
 
 
 dependencies {
-    def f = new File('dep/')
+    def f = new File('lib/')
     if (f.exists()) {
         f.delete()
     }
@@ -84,11 +88,11 @@ dependencies {
         f.mkdir()
     }
     println("  Adding dependencies!")
-    compile "codechicken:CodeChickenLib:1.7.10-1.1.1.95:dev"
-    compile "codechicken:CodeChickenCore:1.7.10-1.0.2.11:dev"
-    compile "codechicken:NotEnoughItems:1.7.10-1.0.2.26:dev"
-    compile "codechicken:ForgeMultipart:1.7.10-1.1.0.297:dev"
+    compile "codechicken:CodeChickenLib:1.7.10-1.1.1.103:dev"
+    compile "codechicken:CodeChickenCore:1.7.10-1.0.2.9:dev"
+    compile "codechicken:NotEnoughItems:1.7.10-1.0.2.15:dev"
     compile "mcp.mobius.waila:Waila:1.5.3_1.7.10"
+    compile "igwmod:IGW-Mod-1.7.10:1.1.0-7:dev"
 
     println("  Finished adding dependencies!")
 }

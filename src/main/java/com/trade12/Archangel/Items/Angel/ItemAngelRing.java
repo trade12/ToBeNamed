@@ -115,8 +115,9 @@ public class ItemAngelRing extends Item implements IBauble {
                         if(name.equals("TheTrade12"))
                             g = 1F - ((float) Math.random() * 0.75F + 0.25F);
                         }
-                    for(int i = 0; i < 3; i++)
-                        Archangel.proxy.sparkleFX(event.entityLiving.worldObj, x + Math.random() * event.entityLiving.width, y + Math.random() * 0.4, z + Math.random() * event.entityLiving.width, r, g, b, 2F * (float) Math.random(), 20);
+
+                        for(int i = 0; i < 3; i++)
+                                Archangel.proxy.sparkleFX(event.entityLiving.worldObj, x + Math.random() * event.entityLiving.width, y + Math.random() * 0.4, z + Math.random() * event.entityLiving.width, r, g, b, 2F * (float) Math.random(), 20);
                     }
                 }
             }
